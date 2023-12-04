@@ -48,7 +48,7 @@ public class TokenBLO implements ITokenBLO {
 					int verseId = (int) token.get("verseId");
 					int rootId = (int) token.get("rootId");
 
-					TokenTO tokenn = new TokenTO(tokenValue, verseId, rootId, pos);
+					TokenTO tokenn = new TokenTO(tokenValue, verseId, pos);
 					insertToken(tokenn);
 					RootTO root = new RootTO(verse_id, createRoot(tokenValue), "Auto");
 

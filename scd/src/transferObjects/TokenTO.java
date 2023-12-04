@@ -31,11 +31,11 @@ public class TokenTO {
 //	public void setRoot_id(int root_id) {
 //		this.root_id = root_id;
 //	}
-	public TokenTO(String token, int verse_id, int root_id, String pos) {
+	public TokenTO(String token, int verse_id, String pos) {
 		super();
 		this.token = token;
 		this.verse_id = verse_id;
-//		this.root_id = root_id;
+
 		this.pos = pos; 
 	}
 	

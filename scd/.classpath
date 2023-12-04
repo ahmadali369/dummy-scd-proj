@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="/Users/apple/Documents/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="lib" path="/Users/apple/Documents/opennlp-tools-2.3.0.jar"/>
 	<classpathentry kind="lib" path="/Users/apple/Documents/Pos_tagger.jar"/>
+	<classpathentry kind="src" path="tests"/>
+	<classpathentry kind="src" path="stubs"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
