@@ -57,6 +57,11 @@ public class PoemDAO implements IPoemDAO {
 			preparedStatement.executeUpdate();
 
 			updatePoemCount(poem.getBookId());
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+//			System.err.println("Duplicate peom");
+		
 		} finally {
 			DBconfig.close(connection, preparedStatement);
 		}

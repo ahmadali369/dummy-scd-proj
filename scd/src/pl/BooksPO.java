@@ -368,8 +368,6 @@ public class BooksPO extends JFrame {
 					Date dob = (Date) datePickerDob.getModel().getValue();
 					Date dod = (Date) datePickerDod.getModel().getValue();
 					
-					System.out.println(dob);
-					System.out.println(dod);
 					
 
 					if (bookNameTextFieldInsert.getText().isEmpty() || authorNameTextFieldInsert.getText().isEmpty()) {
