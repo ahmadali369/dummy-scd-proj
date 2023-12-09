@@ -98,8 +98,8 @@ public class DBconfig {
 				    "book_id INT AUTO_INCREMENT PRIMARY KEY," +
 				    "title VARCHAR(255) NOT NULL," +
 				    "author_name VARCHAR(255) NOT NULL," +
-				    "author_date_of_birth VARCHAR(10) NOT NULL," +
-				    "author_date_of_death VARCHAR(10) NOT NULL," +
+				    "author_date_of_birth VARCHAR(30) NOT NULL," +
+				    "author_date_of_death VARCHAR(30) NOT NULL," +
 				    "total_poems INT NOT NULL" +
 				    ")";
 				statement.executeUpdate(createBooksTableSQL);

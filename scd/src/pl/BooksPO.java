@@ -7,11 +7,17 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +32,9 @@ import javax.swing.table.DefaultTableModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import bll.interfaces.IBLLFacade;
 import transferObjects.BookTO;
@@ -46,6 +55,8 @@ public class BooksPO extends JFrame {
 	private String author;
 	private int id;
 	private static final Logger logger = LogManager.getLogger(BooksPO.class);
+	
+
 
 	public BooksPO(IBLLFacade obj) {
 
@@ -87,25 +98,46 @@ public class BooksPO extends JFrame {
 		JTextField authorNameTextFieldInsert = new JTextField(20);
 
 
-		JTextField dateOfBirthAuthorTextFieldInsert = new JTextField(10);
-		JTextField dateOfDeathAuthorTextFieldInsert = new JTextField(10);
 		JButton buttonBackinsert = new JButton("<-");
 
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
 		backButtonPanel.add(buttonBackinsert);
 		backButtonPanel.add(new JLabel("Create Book"));
+		
+		
+		
+		////////
+		UtilDateModel modelDob = new UtilDateModel();
+		UtilDateModel modelDod = new UtilDateModel();
+		
+		Properties p = new Properties();
+//		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+		
+		JDatePanelImpl datePanelDob = new JDatePanelImpl(modelDob, p);
+		JDatePanelImpl datePanelDod = new JDatePanelImpl(modelDod, p);
+		
+		JDatePickerImpl datePickerDob = new JDatePickerImpl(datePanelDob, new DateLabelFormatter());
+		JDatePickerImpl datePickerDod = new JDatePickerImpl(datePanelDod, new DateLabelFormatter());
 
+		
+		
+		
+		
+		
 		JPanel inputFieldsPanelHorizontal = new JPanel(new GridLayout(0, 1));
 		inputFieldsPanelHorizontal.add(new JLabel("Book Title: "));
 		inputFieldsPanelHorizontal.add(bookNameTextFieldInsert);
 		inputFieldsPanelHorizontal.add(new JLabel("Author: "));
 		inputFieldsPanelHorizontal.add(authorNameTextFieldInsert);
 
-		inputFieldsPanelHorizontal.add(new JLabel("Date of Birth (Author): "));
-		inputFieldsPanelHorizontal.add(dateOfBirthAuthorTextFieldInsert);
+		inputFieldsPanelHorizontal.add(new JLabel("Date of Birth (Author): "));		
+		inputFieldsPanelHorizontal.add(datePickerDob);
+		
 		inputFieldsPanelHorizontal.add(new JLabel("Date of Death (Author): "));
-		inputFieldsPanelHorizontal.add(dateOfDeathAuthorTextFieldInsert);
+		inputFieldsPanelHorizontal.add(datePickerDod);
 
 		inputFieldsPanelForInsertBook.setLayout(new BoxLayout(inputFieldsPanelForInsertBook, BoxLayout.Y_AXIS));
 		inputFieldsPanelForInsertBook.setAlignmentY(TOP_ALIGNMENT);
@@ -331,10 +363,16 @@ public class BooksPO extends JFrame {
 					JFrame frame = new JFrame("TextField Validation");
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setLayout(new GridLayout(3, 2));
+					
+					
+					Date dob = (Date) datePickerDob.getModel().getValue();
+					Date dod = (Date) datePickerDod.getModel().getValue();
+					
+					System.out.println(dob);
+					System.out.println(dod);
+					
 
-					if (bookNameTextFieldInsert.getText().isEmpty() || authorNameTextFieldInsert.getText().isEmpty()
-							|| dateOfBirthAuthorTextFieldInsert.getText().isEmpty()
-							|| dateOfDeathAuthorTextFieldInsert.getText().isEmpty()) {
+					if (bookNameTextFieldInsert.getText().isEmpty() || authorNameTextFieldInsert.getText().isEmpty()) {
 						JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
@@ -344,8 +382,9 @@ public class BooksPO extends JFrame {
 							BookTO book = new BookTO();
 							book.setTitle(bookNameTextFieldInsert.getText());
 							book.setAuthorName(authorNameTextFieldInsert.getText());
-							book.setAuthorDateOfBirth(dateOfBirthAuthorTextFieldInsert.getText());
-							book.setAuthorDateOfDeath(dateOfDeathAuthorTextFieldInsert.getText());
+							book.setAuthorDateOfBirth(dob.toString());
+							book.setAuthorDateOfDeath(dod.toString());
+							
 							book.setTotalPoems(0);
 							facadeBLL.insertBook(book);
 
@@ -416,5 +455,30 @@ public class BooksPO extends JFrame {
 		});
 
 	}
+
+}
+
+
+
+
+class DateLabelFormatter extends AbstractFormatter {
+
+    private String datePattern = "yyyy-MM-dd";
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+    @Override
+    public Object stringToValue(String text) throws ParseException {
+        return dateFormatter.parseObject(text);
+    }
+
+    @Override
+    public String valueToString(Object value) throws ParseException {
+        if (value != null) {
+            Calendar cal = (Calendar) value;
+            return dateFormatter.format(cal.getTime());
+        }
+
+        return "";
+    }
 
 }
