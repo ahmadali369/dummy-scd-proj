@@ -7,13 +7,13 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/ADAT-Stemmer.v1.20180101.jar"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/log4j-api-2.21.1.jar"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/log4j-core-2.21.1.jar"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/mysql-connector-j-8.0.31.jar"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/opennlp-tools-2.3.0.jar"/>
-	<classpathentry kind="lib" path="/Users/apple/Documents/Pos_tagger.jar"/>
 	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="src" path="stubs"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/ADAT-Stemmer.v1.20180101.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/log4j-api-2.21.1.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/log4j-core-2.21.1.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/mysql-connector-j-8.0.31.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/opennlp-tools-2.3.0.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/jars/Pos_tagger.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
