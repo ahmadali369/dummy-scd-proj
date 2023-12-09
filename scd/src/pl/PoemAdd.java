@@ -438,12 +438,7 @@ public class PoemAdd extends JFrame {
 			poemDataList.add(textField.getText());
 		}
 
-		
-		
-		
 		for (String poemData : poemDataList) {
-
-
 
 			PoemTO poem = new PoemTO();
 			poem.setTitle(poemData);
@@ -487,7 +482,7 @@ public class PoemAdd extends JFrame {
 					facadeBLL.importPoem(idBook, selectedFile);
 					JOptionPane.showMessageDialog(frame, "Poems Imported successfully.", "Success",
 							JOptionPane.INFORMATION_MESSAGE);
-					
+
 				} else {
 					JOptionPane.showMessageDialog(frame, "Warning: Only Arabic books are supported for now.", "Warning",
 							JOptionPane.WARNING_MESSAGE);
@@ -498,6 +493,5 @@ public class PoemAdd extends JFrame {
 			}
 		}
 	}
-
 
 }
