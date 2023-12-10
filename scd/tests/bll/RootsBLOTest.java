@@ -1,7 +1,5 @@
 package bll;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.Assertions;
@@ -55,14 +53,14 @@ class RootsBLOTest {
 	
 	@Test
 	void test1() throws SQLException {
-		facadeBLL.viewTableRecords(); 
+		facadeBLL.getAllRoots(); 
 		Assertions.assertEquals(1, 1);
 	}
-	@Test
-	void test2() throws SQLException {
-		facadeBLL.insertroot("root");
-		Assertions.assertEquals(1, 1);
-	}
+//	@Test
+//	void test2() throws SQLException {
+//		facadeBLL.insertroot("root");
+//		Assertions.assertEquals(1, 1);
+//	}
 	@Test
 	void test3() {
 		 
@@ -82,7 +80,7 @@ class RootsBLOTest {
 	@Test
 	void test6() {
 		int verseid = 0; 
-		facadeBLL.getAllRoots(verseid); 
+		facadeBLL.getAllRootsByVerseId(verseid); 
 		Assertions.assertEquals(1, 1);
 	}
 	@Test

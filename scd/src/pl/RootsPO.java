@@ -33,6 +33,7 @@ import org.apache.logging.log4j.Logger;
 
 //import Presentation_Layer.Root_Home;
 import bll.interfaces.IBLLFacade;
+import transferObjects.RootTO;
 
 public class RootsPO extends JFrame {
 
@@ -111,7 +112,7 @@ public class RootsPO extends JFrame {
 				dtm.fireTableDataChanged();
 				words.clear();
 				try {
-					words = facadeBLL.viewTableRecords();
+					words = facadeBLL.getAllRoots();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -166,14 +167,9 @@ public class RootsPO extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (insertbtn.isSelected()) {
-					try {
-						facadeBLL.insertroot(textFieldword.getText());
-						table();
-					} catch (SQLException e1) {
-						logger.debug("btnNewButton_insert func triggerd an exception");
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					RootTO rootTO = new RootTO(-1, textFieldword.getText(), "Manual"); 
+					facadeBLL.insertRoot(rootTO);
+					table();
 
 				} else {
 
@@ -473,7 +469,7 @@ public class RootsPO extends JFrame {
 		dtm.fireTableDataChanged();
 		words.clear();
 		try {
-			words = facadeBLL.viewTableRecords();
+			words = facadeBLL.getAllRoots();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

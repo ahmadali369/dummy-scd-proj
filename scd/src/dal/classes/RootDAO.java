@@ -28,7 +28,7 @@ public class RootDAO implements IRootDAO {
 	DBconfig dbconnection = DBconfig.getInstance();
 
 	@Override
-	public List getrootword() throws SQLException {
+	public List getAllRoots() throws SQLException {
 		roots.clear();
 		try {
 
@@ -55,25 +55,25 @@ public class RootDAO implements IRootDAO {
 		return roots;
 
 	}
-
-	@Override
-	public void insertrootword(String root) throws SQLException {
-
-		connection = dbconnection.getConnection();
-		String str = "";
-		try {
-
-			str = "insert into root values(" + null + ",'" + root + "')";
-			PreparedStatement st = connection.prepareStatement(str);
-			st.execute();
-
-			JOptionPane.showMessageDialog(null, "Data Inserted SUCCESSFULLY");
-		} catch (SQLException e) {
-			logger.debug("insertrootword func triggerd an exception");
-			System.out.println(e);
-		}
-		connection.close();
-	}
+//
+//	@Override
+//	public void insertrootword(String root) throws SQLException {
+//
+//		connection = dbconnection.getConnection();
+//		String str = "";
+//		try {
+//
+//			str = "insert into root values(" + null + ",'" + root + "')";
+//			PreparedStatement st = connection.prepareStatement(str);
+//			st.execute();
+//
+//			JOptionPane.showMessageDialog(null, "Data Inserted SUCCESSFULLY");
+//		} catch (SQLException e) {
+//			logger.debug("insertrootword func triggerd an exception");
+//			System.out.println(e);
+//		}
+//		connection.close();
+//	}
 
 	@Override
 	public void updateroot(String rootw, String id) {
@@ -119,7 +119,7 @@ public class RootDAO implements IRootDAO {
 	/// -----------------------------------------------------
 
 	@Override
-	public List<Map<String, Object>> getAllRoots(int verseId) throws SQLException {
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) throws SQLException {
 		List<Map<String, Object>> roots = new ArrayList<>();
 
 		try (Connection connection = dbconnection.getConnection()) {
@@ -262,18 +262,17 @@ public class RootDAO implements IRootDAO {
 		String updateQuery = "INSERT INTO root (token_id, verse_id, root, status) VALUES (?, ?, ?, 'Assigned')";
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-			preparedStatement.setInt(1, 1); 
+			preparedStatement.setInt(1, 1);
 			preparedStatement.setInt(2, verseId);
 			preparedStatement.setString(3, selectedRoot);
 
-			// Execute the update query
 			int rowsAffected = preparedStatement.executeUpdate();
 
 			if (rowsAffected > 0) {
-				// Entry added successfully
+
 				System.out.println("Root assigned successfully");
 			} else {
-				// Duplicate entry
+
 				System.out.println("Cannot add duplicate entry");
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
@@ -282,7 +281,7 @@ public class RootDAO implements IRootDAO {
 			System.out.println("Cannot add duplicate entry");
 		} catch (SQLException e) {
 			logger.debug("updateRootStatus func triggerd an exception");
-			e.printStackTrace(); 
+			e.printStackTrace();
 		}
 	}
 
@@ -310,7 +309,7 @@ public class RootDAO implements IRootDAO {
 			}
 		} catch (SQLException e) {
 			logger.debug("getVerseId func triggerd an exception");
-			e.printStackTrace(); 
+			e.printStackTrace();
 		}
 
 		return verseId;

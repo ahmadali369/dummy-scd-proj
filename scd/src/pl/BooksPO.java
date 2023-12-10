@@ -325,7 +325,7 @@ public class BooksPO extends JFrame {
 			}
 		});
 
-		// Create "Edit" button
+
 
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -10,16 +10,16 @@ import transferObjects.RootTO;
 public class RootDAOStub implements IRootDAO{
 
 	@Override
-	public List getrootword() throws SQLException {
+	public List getAllRoots() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void insertrootword(String root) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void insertrootword(String root) throws SQLException {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	@Override
 	public void updateroot(String rootw, String id) {
@@ -40,7 +40,7 @@ public class RootDAOStub implements IRootDAO{
 	}
 
 	@Override
-	public List<Map<String, Object>> getAllRoots(int verseId) throws SQLException {
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

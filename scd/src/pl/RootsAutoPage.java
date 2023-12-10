@@ -78,7 +78,7 @@ public class RootsAutoPage {
 				for (int i = 0; i < idVersesModel.getRowCount(); i++) {
 
 					List<Map<String, Object>> tokens = facadeBLL.getAllTokens((int) idVersesModel.getValueAt(i, 0));
-					List<Map<String, Object>> roots = facadeBLL.getAllRoots((int) idVersesModel.getValueAt(i, 0));
+					List<Map<String, Object>> roots = facadeBLL.getAllRootsByVerseId((int) idVersesModel.getValueAt(i, 0));
 
 					if (roots.isEmpty()) {
 						System.err.println("no tokens found------------");

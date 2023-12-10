@@ -21,18 +21,18 @@ public class RootsBLO implements IRootsBLO {
 	}
 
 	@Override
-	public List viewTableRecords() throws SQLException {
+	public List getAllRoots() throws SQLException {
 
-		return facadeDal.getrootword();
-
-	}
-
-	@Override
-	public void insertroot(String rootdata) throws SQLException {
-
-		facadeDal.insertrootword(rootdata);
+		return facadeDal.getAllRoots();
 
 	}
+
+//	@Override
+//	public void insertroot(String rootdata) throws SQLException {
+//
+//		facadeDal.insertrootword(rootdata);
+//
+//	}
 
 	@Override
 	public void updateWord(String rootw, String id) {
@@ -61,10 +61,10 @@ public class RootsBLO implements IRootsBLO {
 	}
 
 	@Override
-	public List<Map<String, Object>> getAllRoots(int verseId) {
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) {
 		// TODO Auto-generated method stub
 		try {
-			return facadeDal.getAllRoots(verseId);
+			return facadeDal.getAllRootsByVerseId(verseId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.debug("getAllRoots func triggerd an exception");
@@ -91,7 +91,5 @@ public class RootsBLO implements IRootsBLO {
 		// TODO Auto-generated method stub
 		facadeDal.updateRootStatus(selectedRoot, selectedVerse);
 	}
-
-	// ==========================
 
 }

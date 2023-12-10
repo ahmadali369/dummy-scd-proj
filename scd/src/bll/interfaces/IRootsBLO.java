@@ -8,9 +8,9 @@ import transferObjects.RootTO;
 
 public interface IRootsBLO {
 
-	public List viewTableRecords() throws SQLException;
+	public List getAllRoots() throws SQLException;
 
-	public void insertroot(String rootdata) throws SQLException;    //
+//	public void insertroot(String rootdata) throws SQLException;    //
 
 	public void updateWord(String rootw, String id);
 
@@ -19,7 +19,7 @@ public interface IRootsBLO {
 	
 	//
 	public void insertRoot(RootTO root); 
-	public List<Map<String, Object>> getAllRoots(int verseId) ; 
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) ; 
 	public void updateStatus(int verse_id) ; 
 	///
 	

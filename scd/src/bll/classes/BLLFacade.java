@@ -85,17 +85,17 @@ public class BLLFacade implements IBLLFacade {
 	}
 
 	@Override
-	public List viewTableRecords() throws SQLException {
+	public List getAllRoots() throws SQLException {
 
-		return rootsBLO.viewTableRecords();
+		return rootsBLO.getAllRoots();
 	}
-
-	@Override
-	public void insertroot(String rootdata) throws SQLException {
-		// TODO Auto-generated method stub
-		rootsBLO.insertroot(rootdata);
-
-	}
+//
+//	@Override
+//	public void insertroot(String rootdata) throws SQLException {
+//		// TODO Auto-generated method stub
+//		rootsBLO.insertroot(rootdata);
+//
+//	}
 
 	@Override
 	public void updateWord(String rootw, String id) {
@@ -192,9 +192,9 @@ public class BLLFacade implements IBLLFacade {
 	}
 
 	@Override
-	public List<Map<String, Object>> getAllRoots(int verseId) {
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) {
 		// TODO Auto-generated method stub
-		return rootsBLO.getAllRoots(verseId);
+		return rootsBLO.getAllRootsByVerseId(verseId);
 	}
 
 	@Override

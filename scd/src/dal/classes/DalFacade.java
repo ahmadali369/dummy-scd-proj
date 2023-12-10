@@ -82,18 +82,18 @@ public class DalFacade implements IDalFacade {
 	}
 
 	@Override
-	public List getrootword() throws SQLException {
+	public List getAllRoots() throws SQLException {
 
-		return rootDAO.getrootword();
-
-	}
-
-	@Override
-	public void insertrootword(String root) throws SQLException {
-
-		rootDAO.insertrootword(root);
+		return rootDAO.getAllRoots();
 
 	}
+
+//	@Override
+//	public void insertrootword(String root) throws SQLException {
+//
+//		rootDAO.insertrootword(root);
+//
+//	}
 
 	@Override
 	public void updateroot(String rootw, String id) {
@@ -187,9 +187,9 @@ public class DalFacade implements IDalFacade {
 	}
 
 	@Override
-	public List<Map<String, Object>> getAllRoots(int verseId) throws SQLException {
+	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) throws SQLException {
 		// TODO Auto-generated method stub
-		return rootDAO.getAllRoots(verseId);
+		return rootDAO.getAllRootsByVerseId(verseId);
 	}
 
 	@Override
