@@ -27,19 +27,19 @@ public class VersesDAOStub implements IVerseDAO{
 		
 	}
 
-	@Override
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 
-	@Override
-	public String searchAndDisplayVerses(String root) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public String searchAndDisplayVerses(String root) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public List<Map<String, Object>> getAllVerses(int poem_id) throws SQLException {

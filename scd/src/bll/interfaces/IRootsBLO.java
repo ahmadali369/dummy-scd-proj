@@ -10,7 +10,7 @@ public interface IRootsBLO {
 
 	public List viewTableRecords() throws SQLException;
 
-	public void insertroot(String rootdata) throws SQLException;
+	public void insertroot(String rootdata) throws SQLException;    //
 
 	public void updateWord(String rootw, String id);
 

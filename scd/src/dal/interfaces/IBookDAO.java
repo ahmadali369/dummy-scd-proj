@@ -11,7 +11,7 @@ public interface IBookDAO {
 
 	public List<Map<String, Object>> getAllBooks() throws SQLException;
 
-	public Map<String, Object> getBook(int bookId) throws SQLException;
+//	public Map<String, Object> getBook(int bookId) throws SQLException;
 
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) throws SQLException;
 

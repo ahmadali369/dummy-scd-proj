@@ -12,12 +12,12 @@ public interface IVerseDAO {
 	public void deleteVerse(String misra1, String misra2) throws SQLException ; 
 	
 	public List<Map<String, Object>> getAllVerses(int poem_id) throws SQLException; 
-	
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException; 
-
+//	
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException; 
 //
-
-	public String searchAndDisplayVerses(String root); 
+////
+//
+//	public String searchAndDisplayVerses(String root); 
 
 }
 

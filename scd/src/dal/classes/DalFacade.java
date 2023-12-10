@@ -59,11 +59,11 @@ public class DalFacade implements IDalFacade {
 	public List<Map<String, Object>> getAllBooks() throws SQLException {
 		return bookDAO.getAllBooks();
 	}
-
-	@Override
-	public Map<String, Object> getBook(int bookId) throws SQLException {
-		return bookDAO.getBook(bookId);
-	}
+//
+//	@Override
+//	public Map<String, Object> getBook(int bookId) throws SQLException {
+//		return bookDAO.getBook(bookId);
+//	}
 
 	@Override
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) throws SQLException {
@@ -214,23 +214,23 @@ public class DalFacade implements IDalFacade {
 		return rootDAO.getVerseId(selectedVerse);
 	}
 
-	@Override
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException {
-		// TODO Auto-generated method stub
-		return verseDAO.getAllVersesByRoots(rootVal);
-	}
-
-	@Override
-	public String goToPoem(String root) {
-		// TODO Auto-generated method stub
-		return poemDAO.goToPoem(root);
-	}
-
-	@Override
-	public String searchAndDisplayVerses(String root) {
-		// TODO Auto-generated method stub
-		return verseDAO.searchAndDisplayVerses(root);
-	}
+//	@Override
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) throws SQLException {
+//		// TODO Auto-generated method stub
+//		return verseDAO.getAllVersesByRoots(rootVal);
+//	}
+//
+//	@Override
+//	public String goToPoem(String root) {
+//		// TODO Auto-generated method stub
+//		return poemDAO.goToPoem(root);
+//	}
+//
+//	@Override
+//	public String searchAndDisplayVerses(String root) {
+//		// TODO Auto-generated method stub
+//		return verseDAO.searchAndDisplayVerses(root);
+//	}
 
 	@Override
 	public List<Map<String, Object>> getPoemsByRoot(String root) throws SQLException {

@@ -332,91 +332,91 @@ public class PoemDAO implements IPoemDAO {
 		
 	
 
-	@Override
-	public String goToPoem(String root) {
-//		String root = rootTextField.getText().trim();
-
-		try (Connection connection = dbconnection.getConnection()) {
-			// Check if the root exists in the verse table
-			if (findVerseHavingRoot(root)) {
-				String query = "SELECT poems.title, verses.verse_number, verses.misra1, verses.misra2 " + "FROM poems "
-						+ "JOIN verses ON poems.id = verses.poem_id " + "WHERE poems.id IN (SELECT DISTINCT poems.id "
-						+ "FROM poems " + "JOIN verses ON poems.id = verses.poem_id "
-						+ "JOIN tokens ON verses.verse_id = tokens.verse_id " + "WHERE tokens.token = ?)";
-
-				try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-					preparedStatement.setString(1, root.toLowerCase());
-
-					try (ResultSet resultSet = preparedStatement.executeQuery()) {
-						StringBuilder result = new StringBuilder();
-						String currentPoemTitle = "";
-						while (resultSet.next()) {
-							String poemTitle = resultSet.getString("title");
-							int verseNumber = resultSet.getInt("verse_number");
-							String misra1 = resultSet.getString("misra1");
-							String misra2 = resultSet.getString("misra2");
-
-							// Check if the poem title has changed
-							if (!currentPoemTitle.equals(poemTitle)) {
-								// If it has, append the new poem title
-								currentPoemTitle = poemTitle;
-								result.append("Poem: ").append(poemTitle).append("\n");
-							}
-
-							// Append the current verse information
-							result.append("Verse ").append(verseNumber).append(": ").append(misra1).append(" ")
-									.append(misra2).append("\n");
-						}
-
-						if (result.length() == 0) {
-
-							System.out.println("No verses found for the given root.");
-						} else {
-//							verseTextArea.setText(result.toString());
-							return result.toString();
-						}
-					}
-				}
-			} else {
-
-				System.out.println("Root does not exist in the verse table.");
-			}
-		} catch (Exception e) {
-			logger.debug("goToPoem func triggerd an exception");
-			e.printStackTrace();
-
-			System.out.println("Error occurred. Check console for details.");
-		}
-		System.out.println("Go to poem completed for root: " + root);
-		return "---";
-	}
+//	@Override
+//	public String goToPoem(String root) {
+////		String root = rootTextField.getText().trim();
+//
+//		try (Connection connection = dbconnection.getConnection()) {
+//			// Check if the root exists in the verse table
+//			if (findVerseHavingRoot(root)) {
+//				String query = "SELECT poems.title, verses.verse_number, verses.misra1, verses.misra2 " + "FROM poems "
+//						+ "JOIN verses ON poems.id = verses.poem_id " + "WHERE poems.id IN (SELECT DISTINCT poems.id "
+//						+ "FROM poems " + "JOIN verses ON poems.id = verses.poem_id "
+//						+ "JOIN tokens ON verses.verse_id = tokens.verse_id " + "WHERE tokens.token = ?)";
+//
+//				try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//					preparedStatement.setString(1, root.toLowerCase());
+//
+//					try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//						StringBuilder result = new StringBuilder();
+//						String currentPoemTitle = "";
+//						while (resultSet.next()) {
+//							String poemTitle = resultSet.getString("title");
+//							int verseNumber = resultSet.getInt("verse_number");
+//							String misra1 = resultSet.getString("misra1");
+//							String misra2 = resultSet.getString("misra2");
+//
+//							// Check if the poem title has changed
+//							if (!currentPoemTitle.equals(poemTitle)) {
+//								// If it has, append the new poem title
+//								currentPoemTitle = poemTitle;
+//								result.append("Poem: ").append(poemTitle).append("\n");
+//							}
+//
+//							// Append the current verse information
+//							result.append("Verse ").append(verseNumber).append(": ").append(misra1).append(" ")
+//									.append(misra2).append("\n");
+//						}
+//
+//						if (result.length() == 0) {
+//
+//							System.out.println("No verses found for the given root.");
+//						} else {
+////							verseTextArea.setText(result.toString());
+//							return result.toString();
+//						}
+//					}
+//				}
+//			} else {
+//
+//				System.out.println("Root does not exist in the verse table.");
+//			}
+//		} catch (Exception e) {
+//			logger.debug("goToPoem func triggerd an exception");
+//			e.printStackTrace();
+//
+//			System.out.println("Error occurred. Check console for details.");
+//		}
+//		System.out.println("Go to poem completed for root: " + root);
+//		return "---";
+//	}
 	
 	
-	private boolean findVerseHavingRoot(String root) {
-
-		try (Connection connection = dbconnection.getConnection()) {
-
-			String query = "SELECT COUNT(*) AS count FROM verses WHERE verse_id IN (SELECT verse_id FROM tokens WHERE tokens.token = ?)";
-			try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-				preparedStatement.setString(1, root.toLowerCase());
-
-				try (ResultSet resultSet = preparedStatement.executeQuery()) {
-					if (resultSet.next()) {
-						int count = resultSet.getInt("count");
-						return count > 0;
-					}
-				}
-			} catch (Exception e) {
-				logger.debug("rootExistsInVerse func triggerd an exception");
-				e.printStackTrace();
-			}
-
-		} catch (Exception e) {
-			logger.debug("rootExistsInVerse func triggerd an exception");
-			// TODO: handle exception
-		}
-
-		return false;
-	}
+//	private boolean findVerseHavingRoot(String root) {
+//
+//		try (Connection connection = dbconnection.getConnection()) {
+//
+//			String query = "SELECT COUNT(*) AS count FROM verses WHERE verse_id IN (SELECT verse_id FROM tokens WHERE tokens.token = ?)";
+//			try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//				preparedStatement.setString(1, root.toLowerCase());
+//
+//				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//					if (resultSet.next()) {
+//						int count = resultSet.getInt("count");
+//						return count > 0;
+//					}
+//				}
+//			} catch (Exception e) {
+//				logger.debug("rootExistsInVerse func triggerd an exception");
+//				e.printStackTrace();
+//			}
+//
+//		} catch (Exception e) {
+//			logger.debug("rootExistsInVerse func triggerd an exception");
+//			// TODO: handle exception
+//		}
+//
+//		return false;
+//	}
 
 }

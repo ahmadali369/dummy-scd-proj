@@ -28,6 +28,6 @@ public interface IPoemDAO {
 
 	public void deletePoem(String title) throws SQLException;
 
-	public String goToPoem(String root);
+//	public String goToPoem(String root);
 
 }

@@ -7,9 +7,9 @@ import transferObjects.TokenTO;
 
 public interface ITokenBLO {
 
-	public List<Map<String, Object>> getAllVersesAndGenerateTokensAndRootsList(int poem_id);
+	public List<Map<String, Object>> getAllVersesAndGenerateTokensAndRootsList(int poem_id);   //
 
-	public void insertToken(TokenTO token);
+	public void insertToken(TokenTO token);   
 
 	public List<Map<String, Object>> getAllTokens(int verseId);
 

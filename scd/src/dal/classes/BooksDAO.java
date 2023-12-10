@@ -93,30 +93,30 @@ public class BooksDAO implements IBookDAO {
 
 
 
-	@Override
-	public Map<String, Object> getBook(int bookId) throws SQLException {
-		try (Connection connection = dbconnection.getConnection()) {
-			String selectBookSQL = "SELECT * FROM books WHERE book_id = ?";
-			try (PreparedStatement preparedStatement = connection.prepareStatement(selectBookSQL)) {
-				preparedStatement.setInt(1, bookId);
-				try (ResultSet resultSet = preparedStatement.executeQuery()) {
-					if (resultSet.next()) {
-						Map<String, Object> book = new HashMap<>();
-						book.put("bookId", resultSet.getInt("book_id"));
-						book.put("title", resultSet.getString("title"));
-						book.put("authorName", resultSet.getString("author_name"));
-						book.put("authorDateOfBirth", resultSet.getDate("author_date_of_birth"));
-						book.put("authorDateOfDeath", resultSet.getDate("author_date_of_death"));
-						book.put("totalPoems", resultSet.getInt("total_poems"));
-
-						return book;
-					}
-				}
-			}
-		}
-		logger.debug("No books found in the database.");
-		return null; // Book not found
-	}
+//	@Override
+//	public Map<String, Object> getBook(int bookId) throws SQLException {
+//		try (Connection connection = dbconnection.getConnection()) {
+//			String selectBookSQL = "SELECT * FROM books WHERE book_id = ?";
+//			try (PreparedStatement preparedStatement = connection.prepareStatement(selectBookSQL)) {
+//				preparedStatement.setInt(1, bookId);
+//				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//					if (resultSet.next()) {
+//						Map<String, Object> book = new HashMap<>();
+//						book.put("bookId", resultSet.getInt("book_id"));
+//						book.put("title", resultSet.getString("title"));
+//						book.put("authorName", resultSet.getString("author_name"));
+//						book.put("authorDateOfBirth", resultSet.getDate("author_date_of_birth"));
+//						book.put("authorDateOfDeath", resultSet.getDate("author_date_of_death"));
+//						book.put("totalPoems", resultSet.getInt("total_poems"));
+//
+//						return book;
+//					}
+//				}
+//			}
+//		}
+//		logger.debug("No books found in the database.");
+//		return null; // Book not found
+//	}
 
 	@Override
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) throws SQLException {
