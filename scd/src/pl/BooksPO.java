@@ -112,7 +112,6 @@ public class BooksPO extends JFrame {
 		UtilDateModel modelDod = new UtilDateModel();
 		
 		Properties p = new Properties();
-//		p.put("text.today", "Today");
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 		
@@ -121,6 +120,13 @@ public class BooksPO extends JFrame {
 		
 		JDatePickerImpl datePickerDob = new JDatePickerImpl(datePanelDob, new DateLabelFormatter());
 		JDatePickerImpl datePickerDod = new JDatePickerImpl(datePanelDod, new DateLabelFormatter());
+
+		
+		JDatePanelImpl datePanelDobEdit = new JDatePanelImpl(modelDob, p);
+		JDatePanelImpl datePanelDodEdit = new JDatePanelImpl(modelDod, p);
+		
+		JDatePickerImpl datePickerDobEdit = new JDatePickerImpl(datePanelDobEdit, new DateLabelFormatter());
+		JDatePickerImpl datePickerDodEdit = new JDatePickerImpl(datePanelDodEdit, new DateLabelFormatter());
 
 		
 		
@@ -168,10 +174,11 @@ public class BooksPO extends JFrame {
 		inputFieldsPanelHorizontalEdit.add(authorNameTextFieldEdit);
 
 		inputFieldsPanelHorizontalEdit.add(new JLabel("Update Date of Birth (Author): "));
-		inputFieldsPanelHorizontalEdit.add(dateOfBirthAuthorTextFieldEdit);
+		inputFieldsPanelHorizontalEdit.add(datePickerDobEdit);
 
 		inputFieldsPanelHorizontalEdit.add(new JLabel("Update Date of Death (Author): "));
-		inputFieldsPanelHorizontalEdit.add(dateOfDeathAuthorTextFieldEdit);
+		inputFieldsPanelHorizontalEdit.add(datePickerDodEdit);
+		
 
 		inputFieldsPanelForEditBook.setLayout(new BoxLayout(inputFieldsPanelForEditBook, BoxLayout.Y_AXIS));
 		inputFieldsPanelForEditBook.setAlignmentY(TOP_ALIGNMENT);
@@ -414,9 +421,13 @@ public class BooksPO extends JFrame {
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setLayout(new GridLayout(3, 2));
 
+					
+					Date dob = (Date) datePickerDobEdit.getModel().getValue();
+					Date dod = (Date) datePickerDodEdit.getModel().getValue();
+					
+					
 					if (bookNameTextFieldEdit.getText().isEmpty() || authorNameTextFieldEdit.getText().isEmpty()
-							|| dateOfBirthAuthorTextFieldEdit.getText().isEmpty()
-							|| dateOfDeathAuthorTextFieldEdit.getText().isEmpty()) {
+							) {
 						JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
@@ -427,8 +438,8 @@ public class BooksPO extends JFrame {
 
 							book.setTitle(bookNameTextFieldEdit.getText());
 							book.setAuthorName(authorNameTextFieldEdit.getText());
-							book.setAuthorDateOfBirth(dateOfBirthAuthorTextFieldEdit.getText());
-							book.setAuthorDateOfDeath(dateOfDeathAuthorTextFieldEdit.getText());
+							book.setAuthorDateOfBirth(dob.toString());
+							book.setAuthorDateOfDeath(dod.toString());
 							book.setTotalPoems(0);
 							facadeBLL.updateBook(bookNameTextFieldEditTemp.getText(),
 									authorNameTextFieldEditTemp.getText(), book);
