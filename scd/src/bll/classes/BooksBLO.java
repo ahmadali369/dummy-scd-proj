@@ -49,17 +49,17 @@ public class BooksBLO implements IBooksBLO {
 		return null;
 	}
 
-	@Override
-	public Map<String, Object> getBook(int bookId) {
-		try {
-			return dal.getBook(bookId);
-		} catch (SQLException e) {
-			logger.debug("getbook func triggerd and exception");
-			e.printStackTrace();
-		}
-
-		return null;
-	}
+//	@Override
+//	public Map<String, Object> getBook(int bookId) {
+//		try {
+//			return dal.getBook(bookId);
+//		} catch (SQLException e) {
+//			logger.debug("getbook func triggerd and exception");
+//			e.printStackTrace();
+//		}
+//
+//		return null;
+//	}
 
 	@Override
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) {

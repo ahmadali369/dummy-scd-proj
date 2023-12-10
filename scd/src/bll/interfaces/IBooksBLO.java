@@ -10,7 +10,7 @@ public interface IBooksBLO {
 
 	public List<Map<String, Object>> getAllBooks();
 
-	public Map<String, Object> getBook(int bookId);
+//	public Map<String, Object> getBook(int bookId);   //
 
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book);
 

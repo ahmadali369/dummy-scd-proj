@@ -27,8 +27,6 @@ public class BLLFacade implements IBLLFacade {
 	private IRootsBLO rootsBLO;
 	private ITokenBLO tokenBLO;
 	private IVerseBLO verseBLO; 
-
-	
 	
 	private static BLLFacade obj;
 
@@ -68,11 +66,11 @@ public class BLLFacade implements IBLLFacade {
 		return booksBLO.getAllBooks();
 	}
 
-	@Override
-	public Map<String, Object> getBook(int bookId) {
-
-		return booksBLO.getBook(bookId);
-	}
+//	@Override
+//	public Map<String, Object> getBook(int bookId) {
+//
+//		return booksBLO.getBook(bookId);
+//	}
 
 	@Override
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) {
@@ -119,12 +117,6 @@ public class BLLFacade implements IBLLFacade {
 
 	}
 
-//	@Override
-//	public void chooseBookAndRead(JFrame frame, int bookid) {
-//		// TODO Auto-generated method stub
-//		poemBLO.chooseBookAndRead(frame, bookid);
-//
-//	}
 
 	@Override
 	public List<Map<String, Object>> getAllVersesAndGenerateTokensAndRootsList(int poem_id) {
@@ -218,32 +210,32 @@ public class BLLFacade implements IBLLFacade {
 		rootsBLO.updateRootStatus(selectedRoot, selectedVerse);
 	}
 
-	@Override
-	public int getVerseId(String selectedVerse) {
-		// TODO Auto-generated method stub
-		return verseBLO.getVerseId(selectedVerse);
-	}
+//	@Override
+//	public int getVerseId(String selectedVerse) {
+//		// TODO Auto-generated method stub
+//		return verseBLO.getVerseId(selectedVerse);
+//	}
 
-	@Override
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) {
-		// TODO Auto-generated method stub
-		return verseBLO.getAllVersesByRoots(rootVal);
-	}
-
-
-	@Override
-	public String goToPoem(String root) {
-		// TODO Auto-generated method stub
-		return poemBLO.goToPoem(root);
-	}
+//	@Override
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) {
+//		// TODO Auto-generated method stub
+//		return verseBLO.getAllVersesByRoots(rootVal);
+//	}
 
 
-	@Override
-	public String searchAndDisplayVerses(String root) {
-		// TODO Auto-generated method stub
-		return verseBLO.searchAndDisplayVerses(root);
-	}
+//	@Override
+//	public String goToPoem(String root) {
+//		// TODO Auto-generated method stub
+//		return poemBLO.goToPoem(root);
+//	}
 
+
+//	@Override
+//	public String searchAndDisplayVerses(String root) {
+//		// TODO Auto-generated method stub
+//		return verseBLO.searchAndDisplayVerses(root);
+//	}
+//
 
 	@Override
 	public void importPoem(int bookid, File file) throws SQLException {

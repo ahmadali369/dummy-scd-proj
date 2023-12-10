@@ -78,10 +78,10 @@ public class BooksPO extends JFrame {
 		inputFieldsPanelForEditBook = new JPanel();
 
 		JButton buttonManageBooks = new JButton("Manage Books");
-		JButton searchByRootButton = new JButton("Search by Root");
+//		JButton searchByRootButton = new JButton("Search by Root");
 
 		initialPanel.add(buttonManageBooks);
-		initialPanel.add(searchByRootButton);
+//		initialPanel.add(searchByRootButton);
 		add(initialPanel);
 
 		JButton buttonCreate = new JButton("Insert Book");
@@ -188,13 +188,13 @@ public class BooksPO extends JFrame {
 
 //--------------------
 
-		searchByRootButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				SwingUtilities.invokeLater(() -> new SearchByRoots(facadeBLL));
-
-			}
-		});
+//		searchByRootButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+//				SwingUtilities.invokeLater(() -> new SearchByRoots(facadeBLL));
+//
+//			}
+//		});
 
 //---------------------
 

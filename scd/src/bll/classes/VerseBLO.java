@@ -52,30 +52,30 @@ public class VerseBLO implements IVerseBLO {
 
 	}
 
-	@Override
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) {
-		// TODO Auto-generated method stub
-		try {
-			return facadeDal.getAllVersesByRoots(rootVal);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			logger.debug("getAllVersesByRoots func triggerd an exception");
-			e.printStackTrace();
-		}
-		return null; 
-	}
+//	@Override
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal) {
+//		// TODO Auto-generated method stub
+//		try {
+//			return facadeDal.getAllVersesByRoots(rootVal);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			logger.debug("getAllVersesByRoots func triggerd an exception");
+//			e.printStackTrace();
+//		}
+//		return null; 
+//	}
 
 
 
-	@Override
-	public String searchAndDisplayVerses(String root) {
-		// TODO Auto-generated method stub
-		return facadeDal.searchAndDisplayVerses(root);
-	}
-	@Override
-	public int getVerseId(String selectedVerse) {
-		// TODO Auto-generated method stub
-		return facadeDal.getVerseId(selectedVerse);
-	}
+//	@Override
+//	public String searchAndDisplayVerses(String root) {
+//		// TODO Auto-generated method stub
+//		return facadeDal.searchAndDisplayVerses(root);
+//	}
+//	@Override
+//	public int getVerseId(String selectedVerse) {
+//		// TODO Auto-generated method stub
+//		return facadeDal.getVerseId(selectedVerse);
+//	}
 
 }

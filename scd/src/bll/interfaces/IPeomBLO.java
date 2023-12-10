@@ -25,5 +25,5 @@ public interface IPeomBLO {
 
 	
 	//=
-	public String goToPoem(String root); 
+//	public String goToPoem(String root);  //
 }

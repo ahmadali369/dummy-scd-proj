@@ -67,22 +67,22 @@ class VersesBLOTest {
 		facadeBLL.deleteVerse("misra1", "misra2");
 		Assertions.assertEquals(1, 1);
 	}
-	@Test
-	void test4() {
-		facadeBLL.getAllVersesByRoots("root"); 
-		Assertions.assertEquals(1, 1);
-	}
-	
-	@Test
-	void test5() {
-		facadeBLL.getVerseId("verse id"); 
-		Assertions.assertEquals(1, 1);
-	}
-
-	@Test
-	void test6() {
-		facadeBLL.searchAndDisplayVerses("root"); 
-		Assertions.assertEquals(1, 1);
-	}
+//	@Test
+//	void test4() {
+//		facadeBLL.getAllVersesByRoots("root"); 
+//		Assertions.assertEquals(1, 1);
+//	}
+//	
+//	@Test
+//	void test5() {
+//		facadeBLL.getVerseId("verse id"); 
+//		Assertions.assertEquals(1, 1);
+//	}
+//
+//	@Test
+//	void test6() {
+//		facadeBLL.searchAndDisplayVerses("root"); 
+//		Assertions.assertEquals(1, 1);
+//	}
 
 }

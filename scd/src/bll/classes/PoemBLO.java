@@ -78,11 +78,11 @@ public class PoemBLO implements IPeomBLO {
 
 	}
 	
-	@Override
-	public String goToPoem(String root) {
-		// TODO Auto-generated method stub
-		return dal.goToPoem(root);
-	}
+//	@Override
+//	public String goToPoem(String root) {
+//		// TODO Auto-generated method stub
+//		return dal.goToPoem(root);
+//	}
 
 	@Override
 	public List<Map<String, Object>> getPoemsByRoot(String root) {

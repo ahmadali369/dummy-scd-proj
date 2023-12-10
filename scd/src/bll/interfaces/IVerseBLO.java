@@ -16,11 +16,11 @@ public interface IVerseBLO {
 	
 //==
 	
-	public List<Map<String, Object>> getAllVersesByRoots(String rootVal); 
-
-	public String searchAndDisplayVerses(String root); 
-	
-	public int getVerseId(String selectedVerse); 
-	
+//	public List<Map<String, Object>> getAllVersesByRoots(String rootVal);   //
+//
+//	public String searchAndDisplayVerses(String root);    //
+//	
+//	public int getVerseId(String selectedVerse);   //
+	 
 
 }
