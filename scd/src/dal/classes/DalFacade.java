@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import bll.interfaces.IPeomBLO;
 import dal.interfaces.IBookDAO;
 import dal.interfaces.IDalFacade;
 import dal.interfaces.IPoemDAO;
@@ -229,6 +230,12 @@ public class DalFacade implements IDalFacade {
 	public String searchAndDisplayVerses(String root) {
 		// TODO Auto-generated method stub
 		return verseDAO.searchAndDisplayVerses(root);
+	}
+
+	@Override
+	public List<Map<String, Object>> getPoemsByRoot(String root) throws SQLException {
+		// TODO Auto-generated method stub
+		return poemDAO.getPoemsByRoot(root);
 	}
 
 }

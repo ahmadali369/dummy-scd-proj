@@ -252,4 +252,11 @@ public class BLLFacade implements IBLLFacade {
 		
 	}
 
+
+	@Override
+	public List<Map<String, Object>> getPoemsByRoot(String root) {
+		// TODO Auto-generated method stub
+		return poemBLO.getPoemsByRoot(root);
+	}
+
 }

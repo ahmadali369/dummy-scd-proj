@@ -21,6 +21,7 @@ public interface IPeomBLO {
 	public void deletePoem(String title);
 	
 	public List<Map<String, Object>> getAllPoems(int bookid);
+	public List<Map<String, Object>> getPoemsByRoot(String root); 
 
 	
 	//=

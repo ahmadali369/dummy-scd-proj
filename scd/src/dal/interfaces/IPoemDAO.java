@@ -15,6 +15,8 @@ public interface IPoemDAO {
 	public void savePoem(PoemTO poem) throws SQLException;
 
 	public List<Map<String, Object>> getAllPoems(int bookid) throws SQLException;
+	
+	public List<Map<String, Object>> getPoemsByRoot(String root) throws SQLException; 
 
 //	public void insertDataFromJTable(PoemTO poem, VerseTO verse);
 

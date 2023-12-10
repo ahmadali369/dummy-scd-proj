@@ -202,9 +202,11 @@ public class PoemPage extends JFrame {
 		
 		buttonRootSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Map<String, Object>> poems = facadeBLL.getAllPoems(book_id);
+				List<Map<String, Object>> poems = facadeBLL.getPoemsByRoot(rootSearchField.toString());
 
 				if (poems.isEmpty()) {
+					
+					System.err.println("empty");
 
 				} else {
 					listPanel.removeAll();
@@ -357,9 +359,4 @@ public class PoemPage extends JFrame {
 	}
 
 	
-	public static void main(String[]args) {
-		
-		PoemPage poemPage = new PoemPage(null); 
-		poemPage.setVisible(true);
-	}
 }

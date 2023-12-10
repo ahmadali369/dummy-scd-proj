@@ -84,5 +84,17 @@ public class PoemBLO implements IPeomBLO {
 		return dal.goToPoem(root);
 	}
 
+	@Override
+	public List<Map<String, Object>> getPoemsByRoot(String root) {
+		// TODO Auto-generated method stub
+		try {
+			return dal.getPoemsByRoot(root);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null; 
+	}
+
 
 }

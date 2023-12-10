@@ -53,4 +53,12 @@ public class PoemDAOStub implements IPoemDAO{
 		return null;
 	}
 
+
+
+	@Override
+	public List<Map<String, Object>> getPoemsByRoot(String root) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

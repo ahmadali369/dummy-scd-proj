@@ -59,8 +59,6 @@ public class PoemDAO implements IPoemDAO {
 			updatePoemCount(poem.getBookId());
 			
 		}catch (Exception e) {
-			// TODO: handle exception
-//			System.err.println("Duplicate peom");
 		
 		} finally {
 			DBconfig.close(connection, preparedStatement);
@@ -92,7 +90,7 @@ public class PoemDAO implements IPoemDAO {
 			}
 		}
 
-		// ---------------------------------------------------------------------------------------------------
+
 
 		if (poems.isEmpty()) {
 			logger.debug("No poems found in the database.");
@@ -100,6 +98,53 @@ public class PoemDAO implements IPoemDAO {
 
 		return poems;
 	}
+	
+	
+	@Override
+	public List<Map<String, Object>> getPoemsByRoot(String root) throws SQLException {
+	    List<Map<String, Object>> poems = new ArrayList<>();
+
+	    try (Connection connection = dbconnection.getConnection()) {
+	        // Select poems related to the given root
+	        String selectPoemsByRootSQL = 
+	                "SELECT DISTINCT p.id AS poemid, p.title, p.total_verses, p.book_id " +
+	                "FROM poems p " +
+	                "JOIN verses v ON p.id = v.poem_id " +
+	                "JOIN verse_token_junction vtj ON v.verse_id = vtj.verse_id " +
+	                "JOIN tokens t ON vtj.token_id = t.token_id " +
+	                "LEFT JOIN verse_root_junction vrj ON v.verse_id = vrj.verse_id " +
+	                "LEFT JOIN root r ON vrj.root_id = r.id AND t.token_id = r.token_id " +
+	                "WHERE r.root = ? OR r.root IS NULL";
+
+	        try (PreparedStatement preparedStatement = connection.prepareStatement(selectPoemsByRootSQL)) {
+	            preparedStatement.setString(1, root);
+
+	            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+	                while (resultSet.next()) {
+	                    Map<String, Object> poem = new HashMap<>();
+
+	                    // Retrieve data from the result set
+	                    int poemId = resultSet.getInt("poemid");
+	                    poem.put("poemid", poemId);
+	                    poem.put("title", resultSet.getString("title"));
+	                    poem.put("total_verses", resultSet.getString("total_verses"));
+	                    poem.put("bookId", resultSet.getInt("book_id"));
+
+	                    // Add the poem data to the list
+	                    poems.add(poem);
+	                }
+	            }
+	        }
+	    }
+
+	    // Return the list of poems associated with the given root
+	    return poems;
+	}
+
+
+	
+	
+	
 
 //	@Override
 //	public void insertDataFromJTable(PoemTO poem, VerseTO verse) {
