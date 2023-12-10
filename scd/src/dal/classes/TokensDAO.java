@@ -22,8 +22,6 @@ public class TokensDAO implements ITokenDAO {
 	DBconfig dbconnection = DBconfig.getInstance();
 	private static final Logger logger = LogManager.getLogger(TokensDAO.class);
 
-
-
 	@Override
 	public List<Map<String, Object>> getAllTokens(int verseId) throws SQLException {
 		List<Map<String, Object>> tokens = new ArrayList<>();
@@ -72,13 +70,58 @@ public class TokensDAO implements ITokenDAO {
 
 					preparedStatement.setString(1, token.getToken());
 					preparedStatement.setInt(2, token.getVerse_id());
-//	            preparedStatement.setInt(3, token.getRoot_id());
 					preparedStatement.setString(3, token.getPos());
 					preparedStatement.executeUpdate();
 
 					connection.commit();
+					
+					try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+						if (generatedKeys.next()) {
+							int generatedTokenId = generatedKeys.getInt(1);
+							
+							verseTokenJunction(generatedTokenId, token.getVerse_id()); 
+
+						} else {
+							throw new SQLException("Failed to retrieve generated key for token.");
+						}
+					}
+
+					
 
 				}
+			}
+
+		} catch (SQLException e) {
+			logger.debug("insertToken func triggerd an exception");
+			if (connection != null) {
+				connection.rollback();
+			}
+
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
+	}
+
+	public void verseTokenJunction(int tokenId, int verseId) throws SQLException {
+		Connection connection = null;
+		try {
+			connection = dbconnection.getConnection();
+			connection.setAutoCommit(false);
+
+			String insertVerseTokenSQL = "INSERT INTO verse_token_junction (verse_id, token_id) VALUES (?, ?)";
+			try (PreparedStatement preparedStatement = connection.prepareStatement(insertVerseTokenSQL,
+					Statement.RETURN_GENERATED_KEYS)) {
+
+				preparedStatement.setInt(1, verseId);
+				preparedStatement.setInt(2, tokenId);
+
+				preparedStatement.executeUpdate();
+
+				connection.commit();
+
 			}
 
 		} catch (SQLException e) {

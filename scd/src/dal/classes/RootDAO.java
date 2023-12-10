@@ -23,7 +23,7 @@ public class RootDAO implements IRootDAO {
 
 	static List<String> roots = new ArrayList<String>();
 	private static final Logger logger = LogManager.getLogger(RootDAO.class);
-	
+
 	Connection connection;
 	DBconfig dbconnection = DBconfig.getInstance();
 
@@ -168,6 +168,18 @@ public class RootDAO implements IRootDAO {
 				preparedStatement.executeUpdate();
 
 				connection.commit();
+
+				try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						int generatedRootId = generatedKeys.getInt(1);
+
+						verseRootJunction(generatedRootId, root.getVerse_id());
+
+					} else {
+						throw new SQLException("Failed to retrieve generated key for token.");
+					}
+				}
+
 			}
 
 		} catch (SQLException e) {
@@ -176,7 +188,39 @@ public class RootDAO implements IRootDAO {
 				connection.rollback();
 			}
 
-//	        e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
+	}
+
+	public void verseRootJunction(int rootId, int verseId) throws SQLException {
+		Connection connection = null;
+		try {
+			connection = dbconnection.getConnection();
+			connection.setAutoCommit(false);
+
+			String insertVerseRootSQL = "INSERT INTO verse_root_junction (verse_id, root_id) VALUES (?, ?)";
+			try (PreparedStatement preparedStatement = connection.prepareStatement(insertVerseRootSQL,
+					Statement.RETURN_GENERATED_KEYS)) {
+
+				preparedStatement.setInt(1, verseId);
+				preparedStatement.setInt(2, rootId);
+
+				preparedStatement.executeUpdate();
+
+				connection.commit();
+
+			}
+
+		} catch (SQLException e) {
+			logger.debug("insertToken func triggerd an exception");
+			if (connection != null) {
+				connection.rollback();
+			}
+
+			e.printStackTrace();
 		} finally {
 			if (connection != null) {
 				connection.close();
@@ -199,16 +243,14 @@ public class RootDAO implements IRootDAO {
 			}
 		}
 	}
-	
-	
-	
-	//==========================================
-	
+
+	// ==========================================
+
 	@Override
 	public void updateRootStatus(String selectedRoot, String selectedVerse) {
-		// Retrieve the verse_id for the selected verse
+
 		int verseId = getVerseId(selectedVerse);
-		
+
 		try {
 			connection = dbconnection.getConnection();
 		} catch (SQLException e) {
@@ -246,7 +288,7 @@ public class RootDAO implements IRootDAO {
 
 	@Override
 	public int getVerseId(String selectedVerse) {
-		
+
 		int verseId = 0;
 
 		try {
@@ -273,8 +315,5 @@ public class RootDAO implements IRootDAO {
 
 		return verseId;
 	}
-	
-	
-	
 
 }

@@ -84,15 +84,7 @@ public class DBconfig {
 			String useDatabaseSQL = "USE " + DB_NAME;
 			statement.executeUpdate(useDatabaseSQL);
 
-			String createRootTableSQL = "CREATE TABLE IF NOT EXISTS root (" +
-				    "id INT AUTO_INCREMENT PRIMARY KEY," +     
-				    "token_id INT," +                          
-				    "verse_id INT," +                          
-				    "root VARCHAR(500) UNIQUE," +                     
-				    "status VARCHAR(500)" +                    
-				    ")";
 
-				statement.executeUpdate(createRootTableSQL);
 
 				String createBooksTableSQL = "CREATE TABLE IF NOT EXISTS books (" +
 				    "book_id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -130,13 +122,46 @@ public class DBconfig {
 					    "token_id INT AUTO_INCREMENT PRIMARY KEY," +
 					    "token TEXT," +
 					    "verse_id INT," +
-//					    "root_id INT," +
 					    "pos TEXT," +
 					    "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE" +
-//					    "FOREIGN KEY (root_id) REFERENCES root (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+
 					    ")";
 					statement.executeUpdate(createTokenTableSQL);
-			
+					
+					
+					
+					String createRootTableSQL = "CREATE TABLE IF NOT EXISTS root (" +
+						    "id INT AUTO_INCREMENT PRIMARY KEY," +     
+						    "token_id INT," +                          
+						    "verse_id INT," +                          
+						    "root VARCHAR(500) UNIQUE," +                     
+						    "status VARCHAR(500)" +                    
+						    ")";
+
+						statement.executeUpdate(createRootTableSQL);
+					
+					
+					
+					String createVerseTokenJunctionTableSQL = "CREATE TABLE IF NOT EXISTS verse_token_junction (" +
+					        "verse_id INT," +
+					        "token_id INT," +
+					        "PRIMARY KEY (verse_id, token_id)," +
+					        "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE," +
+					        "FOREIGN KEY (token_id) REFERENCES tokens (token_id) ON DELETE CASCADE ON UPDATE CASCADE" +
+					        ")";
+					statement.executeUpdate(createVerseTokenJunctionTableSQL);
+		
+					
+					
+					String createVerseRootJunctionTableSQL = "CREATE TABLE IF NOT EXISTS verse_root_junction (" +
+					        "verse_id INT," +
+					        "root_id INT," +
+					        "PRIMARY KEY (verse_id, root_id)," +
+					        "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE," +
+					        "FOREIGN KEY (root_id) REFERENCES root (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+					        ")";
+					statement.executeUpdate(createVerseRootJunctionTableSQL);
+
 			
 
 		} catch (SQLException e) {
