@@ -70,10 +70,20 @@ public class PoemPage extends JFrame {
 		inputFieldsPanelForEditpoem = new JPanel();
 
 		JButton buttonRead = new JButton("Reload");
-
+		
+		JButton buttonRootSearch = new JButton("Search"); 
+		JTextField rootSearchField = new JTextField(20); 
+		
+		
+		
+		
+		
 		JButton buttonEditpoem = new JButton("Edit");
 
-		crudOperationPanel.add(new JLabel("Poems-------------------------------"));
+		crudOperationPanel.add(new JLabel("Poems----------------"));
+		
+		crudOperationPanel.add(rootSearchField);
+		crudOperationPanel.add(buttonRootSearch);
 		crudOperationPanel.add(buttonRead);
 
 		frame.add(crudOperationPanel);
@@ -127,8 +137,70 @@ public class PoemPage extends JFrame {
 		crudOperationPanel.add(addPoemsButton);
 		crudOperationPanel.add(editButton);
 		crudOperationPanel.add(deleteButton);
+		
+		
+		
+		
+		
+		
+		
+		
 
 		buttonRead.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<Map<String, Object>> poems = facadeBLL.getAllPoems(book_id);
+
+				if (poems.isEmpty()) {
+
+				} else {
+					listPanel.removeAll();
+					DefaultTableModel model = new DefaultTableModel();
+					DefaultTableModel idmodel = new DefaultTableModel();
+
+					model.addColumn("Poem Title");
+					model.addColumn("Total Verses");
+					idmodel.addColumn("id");
+
+					for (Map<String, Object> poem : poems) {
+						model.addRow(new Object[] { poem.get("title"), poem.get("total_verses") });
+						idmodel.addRow(new Object[] { poem.get("poemid"), });
+
+					}
+
+					JTable table = new JTable(model);
+					JTable idtable = new JTable(idmodel);
+					JScrollPane scrollPane = new JScrollPane(table);
+
+					table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+						@Override
+						public void valueChanged(ListSelectionEvent e) {
+							if (!e.getValueIsAdjusting()) {
+								int selectedRow = table.getSelectedRow();
+
+								if (selectedRow != -1) {
+									tableRow = selectedRow;
+
+									poem_id = (int) idtable.getValueAt(tableRow, 0);
+									title = (String) table.getValueAt(tableRow, 0);
+									System.out.println("selected row" + tableRow);
+								}
+							}
+						}
+
+					});
+
+					listPanel.add(scrollPane);
+					listPanel.revalidate();
+					listPanel.repaint();
+
+				}
+
+			}
+
+		});
+		
+		
+		buttonRootSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<Map<String, Object>> poems = facadeBLL.getAllPoems(book_id);
 
@@ -284,4 +356,10 @@ public class PoemPage extends JFrame {
 
 	}
 
+	
+	public static void main(String[]args) {
+		
+		PoemPage poemPage = new PoemPage(null); 
+		poemPage.setVisible(true);
+	}
 }
