@@ -167,7 +167,7 @@ public class RootsPO extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				if (insertbtn.isSelected()) {
-					RootTO rootTO = new RootTO(-1, textFieldword.getText(), "Manual"); 
+					RootTO rootTO = new RootTO(1, textFieldword.getText(), "Manual"); 
 					facadeBLL.insertRoot(rootTO);
 					table();
 
@@ -181,7 +181,7 @@ public class RootsPO extends JFrame {
 
 		btnNewButton_insert.setFont(new Font("Trebuchet MS", Font.BOLD, 18));
 		btnNewButton_insert.setBounds(586, 400, 109, 32);
-		contentPane.add(btnNewButton_insert);
+//		contentPane.add(btnNewButton_insert);     //////     ==============
 
 		JButton btnNewButton_update = new JButton("Update");
 		btnNewButton_update.setBackground(SystemColor.activeCaptionBorder);

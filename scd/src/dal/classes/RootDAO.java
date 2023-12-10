@@ -135,7 +135,7 @@ public class RootDAO implements IRootDAO {
 
 						int rootId = resultSet.getInt("id");
 						root.put("rootId", rootId);
-						root.put("tokenId", resultSet.getInt("token_id"));
+//						root.put("tokenId", resultSet.getInt("token_id"));
 						root.put("verseId", resultSet.getInt("verse_id"));
 						root.put("root", resultSet.getString("root"));
 						root.put("status", resultSet.getString("status"));
@@ -157,14 +157,14 @@ public class RootDAO implements IRootDAO {
 			connection = dbconnection.getConnection();
 			connection.setAutoCommit(false);
 
-			String insertRootSQL = "INSERT INTO root (token_id, verse_id, root, status) VALUES (?, ?, ?, ?)";
+			String insertRootSQL = "INSERT INTO root (verse_id, root, status) VALUES (?, ?, ?)";
 			try (PreparedStatement preparedStatement = connection.prepareStatement(insertRootSQL,
 					Statement.RETURN_GENERATED_KEYS)) {
 
-				preparedStatement.setInt(1, root.getToken_id());
-				preparedStatement.setInt(2, root.getVerse_id());
-				preparedStatement.setString(3, root.getRoot());
-				preparedStatement.setString(4, root.getStatus());
+//				preparedStatement.setInt(1, root.getToken_id());
+				preparedStatement.setInt(1, root.getVerse_id());
+				preparedStatement.setString(2, root.getRoot());
+				preparedStatement.setString(3, root.getStatus());
 				preparedStatement.executeUpdate();
 
 				connection.commit();
@@ -259,12 +259,12 @@ public class RootDAO implements IRootDAO {
 			e.printStackTrace();
 		}
 
-		String updateQuery = "INSERT INTO root (token_id, verse_id, root, status) VALUES (?, ?, ?, 'Assigned')";
+		String updateQuery = "INSERT INTO root (verse_id, root, status) VALUES (?, ?, 'Assigned')";
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-			preparedStatement.setInt(1, 1);
-			preparedStatement.setInt(2, verseId);
-			preparedStatement.setString(3, selectedRoot);
+//			preparedStatement.setInt(1, 1);
+			preparedStatement.setInt(1, verseId);
+			preparedStatement.setString(2, selectedRoot);
 
 			int rowsAffected = preparedStatement.executeUpdate();
 

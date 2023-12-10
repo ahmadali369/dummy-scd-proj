@@ -131,8 +131,7 @@ public class DBconfig {
 					
 					
 					String createRootTableSQL = "CREATE TABLE IF NOT EXISTS root (" +
-						    "id INT AUTO_INCREMENT PRIMARY KEY," +     
-						    "token_id INT," +                          
+						    "id INT AUTO_INCREMENT PRIMARY KEY," +                          
 						    "verse_id INT," +                          
 						    "root VARCHAR(500) UNIQUE," +                     
 						    "status VARCHAR(500)" +                    
