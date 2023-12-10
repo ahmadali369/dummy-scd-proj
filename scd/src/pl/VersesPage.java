@@ -41,7 +41,7 @@ public class VersesPage extends JFrame {
 	private JPanel crudOperationPanel;
 	private JPanel inputFieldsPanelForEditverse;
 
-	private int tableRow;
+	private int tableRow = -1;
 
 	public static int poem_id;
 
@@ -116,6 +116,9 @@ public class VersesPage extends JFrame {
 		RootsPO rootsPO = new RootsPO(facadeBLL);
 		buttonManageRoots.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				facadeBLL.tokenProcessing(poem_id);
+				facadeBLL.rootProcessing(poem_id);
 
 				rootsPO.setVisible(true);
 				Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -222,9 +225,9 @@ public class VersesPage extends JFrame {
 		buttonToken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				facadeBLL.tokenProcessing(poem_id); 
-				facadeBLL.rootProcessing(poem_id); 
-				
+				facadeBLL.tokenProcessing(poem_id);
+				facadeBLL.rootProcessing(poem_id);
+
 				SwingUtilities.invokeLater(() -> new TokenizePage(facadeBLL).idVersesModel = idmodel);
 
 			}
@@ -241,9 +244,17 @@ public class VersesPage extends JFrame {
 
 				try {
 
-					facadeBLL.deleteVerse(misra1, misra2);
-					JOptionPane.showMessageDialog(frame, "Verse Deleted Sccessfully.. Please reload", "Success",
-							JOptionPane.INFORMATION_MESSAGE);
+					if (tableRow != -1) {
+						facadeBLL.deleteVerse(misra1, misra2);
+						JOptionPane.showMessageDialog(frame, "Verse Deleted Sccessfully.. Please reload", "Success",
+								JOptionPane.INFORMATION_MESSAGE);
+
+					} else {
+
+						JOptionPane.showMessageDialog(frame, "No Verse Selected", "Failure",
+								JOptionPane.WARNING_MESSAGE);
+
+					}
 
 				} catch (Exception e1) {
 					logger.debug("deleteButton func triggerd an exception");
@@ -259,13 +270,22 @@ public class VersesPage extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				crudOperationPanel.setVisible(false);
-				inputFieldsPanelForEditverse.setVisible(true);
+				if (tableRow != -1) {
+					crudOperationPanel.setVisible(false);
+					inputFieldsPanelForEditverse.setVisible(true);
 
-				misra1TextFieldEditTemp.setText(misra1);
-				misra2TextFieldEditTemp.setText(misra2);
+					misra1TextFieldEditTemp.setText(misra1);
+					misra2TextFieldEditTemp.setText(misra2);
 
-				frame.add(inputFieldsPanelForEditverse);
+					frame.add(inputFieldsPanelForEditverse);
+
+				} else {
+					JFrame frame2 = new JFrame("TextField Validation");
+					frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame2.setLayout(new GridLayout(3, 2));
+
+					JOptionPane.showMessageDialog(frame2, "No Verse Selected", "Failure", JOptionPane.WARNING_MESSAGE);
+				}
 
 			}
 		});

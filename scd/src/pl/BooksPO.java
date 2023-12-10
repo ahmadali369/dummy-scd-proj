@@ -50,7 +50,7 @@ public class BooksPO extends JFrame {
 	private JPanel inputFieldsPanelForInsertBook;
 	private JPanel inputFieldsPanelForEditBook;
 
-	private int tableRow;
+	private int tableRow = -1;
 	private String title;
 	private String author;
 	private int id;
@@ -304,17 +304,28 @@ public class BooksPO extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				facadeBLL.deleteBook(title, author);
+				
+				
+//				facadeBLL.deleteBook(title, author);
 
 				JFrame frame = new JFrame("TextField Validation");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setLayout(new GridLayout(3, 2));
 
 				try {
+					
+					if(tableRow != -1) {
+						facadeBLL.deleteBook(title, author);
+						JOptionPane.showMessageDialog(frame, "Book Deleted Sccessfully.. Please reload", "Success",
+								JOptionPane.INFORMATION_MESSAGE);
+						
+					}else {
+						JOptionPane.showMessageDialog(frame, "No Book Selected", "Failure",
+								JOptionPane.WARNING_MESSAGE);
+						
+					}
 
-					facadeBLL.deleteBook(title, author);
-					JOptionPane.showMessageDialog(frame, "Book Deleted Sccessfully.. Please reload", "Success",
-							JOptionPane.INFORMATION_MESSAGE);
+
 
 				} catch (Exception e1) {
 					logger.debug("deleteButton func triggerd an exception");
@@ -330,13 +341,28 @@ public class BooksPO extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				crudOperationPanel.setVisible(false);
-				inputFieldsPanelForEditBook.setVisible(true);
+				JFrame frame = new JFrame("TextField Validation");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLayout(new GridLayout(3, 2));
+				
+				if(tableRow != -1) {
+					
+					inputFieldsPanelForEditBook.setVisible(true);
 
-				bookNameTextFieldEditTemp.setText(title);
-				authorNameTextFieldEditTemp.setText(author);
+					bookNameTextFieldEditTemp.setText(title);
+					authorNameTextFieldEditTemp.setText(author);
 
-				add(inputFieldsPanelForEditBook);
+					add(inputFieldsPanelForEditBook);
+					crudOperationPanel.setVisible(false);
+					
+				}else {
+					JOptionPane.showMessageDialog(frame, "No Book Selected", "Failure",
+							JOptionPane.WARNING_MESSAGE);
+					
+				}
+				
+
+
 
 			}
 		});
@@ -344,7 +370,21 @@ public class BooksPO extends JFrame {
 		openBookButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				SwingUtilities.invokeLater(() -> new PoemPage(facadeBLL).book_id = id);
+				
+				if(tableRow != -1) {
+					SwingUtilities.invokeLater(() -> new PoemPage(facadeBLL).book_id = id);
+					
+				}else {
+					JFrame frame = new JFrame("TextField Validation");
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setLayout(new GridLayout(3, 2));
+					
+					JOptionPane.showMessageDialog(frame, "No Book Selected", "Failure",
+							JOptionPane.WARNING_MESSAGE);
+					
+				}
+				
+			
 
 			}
 		});
@@ -360,7 +400,7 @@ public class BooksPO extends JFrame {
 					Date dob = (Date) datePickerDob.getModel().getValue();
 					Date dod = (Date) datePickerDod.getModel().getValue();
 
-					if (bookNameTextFieldInsert.getText().isEmpty() || authorNameTextFieldInsert.getText().isEmpty()) {
+					if (bookNameTextFieldInsert.getText().isEmpty() || authorNameTextFieldInsert.getText().isEmpty() || dob == null || dod == null) {
 						JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {
@@ -407,7 +447,7 @@ public class BooksPO extends JFrame {
 					Date dob = (Date) datePickerDobEdit.getModel().getValue();
 					Date dod = (Date) datePickerDodEdit.getModel().getValue();
 
-					if (bookNameTextFieldEdit.getText().isEmpty() || authorNameTextFieldEdit.getText().isEmpty()) {
+					if (bookNameTextFieldEdit.getText().isEmpty() || authorNameTextFieldEdit.getText().isEmpty() || dob == null || dod == null) {
 						JOptionPane.showMessageDialog(frame, "Please fill in all fields", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					} else {

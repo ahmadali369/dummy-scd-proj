@@ -42,7 +42,7 @@ public class PoemPage extends JFrame {
 
 	private JPanel inputFieldsPanelForEditpoem;
 
-	private int tableRow;
+	private int tableRow = -1 ;
 	public static int book_id;
 
 	private String title;
@@ -244,7 +244,6 @@ public class PoemPage extends JFrame {
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-//				facadeBLL.deleteBook(title, author);
 
 				JFrame frame = new JFrame("TextField Validation");
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -252,9 +251,18 @@ public class PoemPage extends JFrame {
 
 				try {
 
-					facadeBLL.deletePoem(title);
-					JOptionPane.showMessageDialog(frame, "Poem Deleted Sccessfully.. Please reload", "Success",
-							JOptionPane.INFORMATION_MESSAGE);
+					if(tableRow != -1) {
+						facadeBLL.deletePoem(title);
+						JOptionPane.showMessageDialog(frame, "Poem Deleted Sccessfully.. Please reload", "Success",
+								JOptionPane.INFORMATION_MESSAGE);
+						
+					}else{
+						JOptionPane.showMessageDialog(frame, "No Poem Selected", "Failure",
+								JOptionPane.WARNING_MESSAGE);
+						
+					}
+					
+
 
 				} catch (Exception e1) {
 
@@ -271,13 +279,31 @@ public class PoemPage extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				crudOperationPanel.setVisible(false);
-				inputFieldsPanelForEditpoem.setVisible(true);
+	
+				
+				if(tableRow != -1) {
+					
+					crudOperationPanel.setVisible(false);
+					inputFieldsPanelForEditpoem.setVisible(true);
 
-				poemNameTextFieldEditTemp.setText(title);
-//				authorNameTextFieldEditTemp.setText(author);
+					poemNameTextFieldEditTemp.setText(title);
+//					authorNameTextFieldEditTemp.setText(author);
 
-				frame.add(inputFieldsPanelForEditpoem);
+					frame.add(inputFieldsPanelForEditpoem);
+					
+				}else {
+					
+					
+					JFrame frame2 = new JFrame("TextField Validation");
+					frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame2.setLayout(new GridLayout(3, 2));
+					JOptionPane.showMessageDialog(frame2, "No Poem Selected", "Failure",
+							JOptionPane.WARNING_MESSAGE);
+					
+				}
+				
+				
+
 
 			}
 		});
@@ -286,7 +312,17 @@ public class PoemPage extends JFrame {
 		ReadPoemsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				SwingUtilities.invokeLater(() -> new VersesPage(facadeBLL).poem_id = poem_id);
+				JFrame frame = new JFrame("TextField Validation");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLayout(new GridLayout(3, 2));
+				if(tableRow != -1) {
+					SwingUtilities.invokeLater(() -> new VersesPage(facadeBLL).poem_id = poem_id);
+				}else {
+					
+					JOptionPane.showMessageDialog(frame, "No Poem Selected", "Failure",
+							JOptionPane.WARNING_MESSAGE);
+				}
+			
 
 			}
 		});
