@@ -42,6 +42,7 @@ public class RootDAO implements IRootDAO {
 					int id = (int) rs.getObject("id");
 					roots.add(Integer.toString(id));
 					roots.add((String) rs.getObject("root"));
+					roots.add((String) rs.getObject("status"));
 
 				}
 

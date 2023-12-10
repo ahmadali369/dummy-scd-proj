@@ -87,19 +87,30 @@ public class RootsPO extends JFrame {
 		tableData.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		scrollPane.setViewportView(tableData);
 
-		tableData.setModel(new DefaultTableModel(new Object[][] { { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
-				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, },
-				new String[] { "Count", "Root" }));
+//		tableData.setModel(new DefaultTableModel(new Object[][] { { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, { null, null },
+//				{ null, null }, { null, null }, { null, null }, { null, null }, { null, null }, },
+//				new String[] { "Count", "Root" }));
+//
+//		String[] colNames = { "Count", "Root"};
+//		defaultmodel = new DefaultTableModel(colNames, 0);
+		
+		tableData.setModel(new DefaultTableModel(new Object[][] {
+	        {null, null, null},
+	        {null, null, null},
+	        // Add more rows as needed
+	    },
+	    new String[]{"Count", "Root", "Status"}));
 
-		String[] colNames = { "Count", "Root" };
-		defaultmodel = new DefaultTableModel(colNames, 0);
+	String[] colNames = {"Count", "Root", "Status"};
+	DefaultTableModel defaultmodel = new DefaultTableModel(colNames, 0);
+
 
 		JButton btnNewButton = new JButton("View Table");
 		btnNewButton.setBackground(SystemColor.activeCaptionBorder);
@@ -117,11 +128,12 @@ public class RootsPO extends JFrame {
 					e1.printStackTrace();
 				}
 				int count = 1;
-				for (int i = 0; i < words.size(); i = i + 2) {
+				for (int i = 0; i < words.size(); i = i + 3) {
 
-					Object[] B_Dat = new Object[2];
+					Object[] B_Dat = new Object[3];
 					B_Dat[0] = count++;
 					B_Dat[1] = words.get(i + 1);
+					B_Dat[2] = words.get(i + 2);
 
 					defaultmodel.addRow(B_Dat);
 				}
@@ -267,12 +279,13 @@ public class RootsPO extends JFrame {
 
 					try {
 						if (id != null) {
-							for (int i = 0; i < words.size(); i = i + 2) {
+							for (int i = 0; i < words.size(); i = i + 3) {
 								if (id.equals(words.get(i))) {
 
-									Object[] B_Data = new Object[2];
+									Object[] B_Data = new Object[3];
 									B_Data[0] = 1;
 									B_Data[1] = words.get(i + 1);
+									B_Data[2] = words.get(i + 2);
 
 									defaultmodel.addRow(B_Data);
 									break;
@@ -283,12 +296,13 @@ public class RootsPO extends JFrame {
 
 						if (wordField != null) {
 
-							for (int i = 0; i < words.size(); i = i + 2) {
+							for (int i = 0; i < words.size(); i = i + 3) {
 								if (wordField.equals(words.get(i + 1))) {
 
-									Object[] B_Data = new Object[2];
+									Object[] B_Data = new Object[3];
 									B_Data[0] = 1;
 									B_Data[1] = words.get(i + 1);
+									B_Data[2] = words.get(i + 2);
 
 									defaultmodel.addRow(B_Data);
 									break;
@@ -475,11 +489,12 @@ public class RootsPO extends JFrame {
 			e1.printStackTrace();
 		}
 		int count = 1;
-		for (int i = 0; i < words.size(); i = i + 2) {
+		for (int i = 0; i < words.size(); i = i + 3) {
 
-			Object[] B_Dat = new Object[2];
+			Object[] B_Dat = new Object[3];
 			B_Dat[0] = count++;
 			B_Dat[1] = words.get(i + 1);
+			B_Dat[3] = words.get(i + 2);
 
 			defaultmodel.addRow(B_Dat);
 		}
