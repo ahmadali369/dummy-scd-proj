@@ -26,15 +26,14 @@ public class DalFacade implements IDalFacade {
 	private IPoemDAO poemDAO;
 	private IRootDAO rootDAO;
 	private ITokenDAO tokenDAO;
-	private IVerseDAO verseDAO; 
-	
-	
-	
+	private IVerseDAO verseDAO;
+
 	private static DalFacade obj;
 
-	public static DalFacade getInstance(IPoemDAO poemDAO, IBookDAO bookDAO, IRootDAO rootDAO, ITokenDAO tokenDAO, IVerseDAO verseDAO) {
+	public static DalFacade getInstance(IPoemDAO poemDAO, IBookDAO bookDAO, IRootDAO rootDAO, ITokenDAO tokenDAO,
+			IVerseDAO verseDAO) {
 		if (obj == null)
-			obj = new DalFacade(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO); 
+			obj = new DalFacade(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
 		return obj;
 	}
 
@@ -44,10 +43,9 @@ public class DalFacade implements IDalFacade {
 		this.bookDAO = bookDAO;
 		this.poemDAO = poemDAO;
 		this.rootDAO = rootDAO;
-		this.verseDAO = verseDAO; 
+		this.verseDAO = verseDAO;
 
 	}
-	
 
 	@Override
 	public void insertBook(BookTO book) throws SQLException {
@@ -82,7 +80,6 @@ public class DalFacade implements IDalFacade {
 		poemDAO.savePoem(poem);
 
 	}
-
 
 	@Override
 	public List getrootword() throws SQLException {
@@ -146,21 +143,21 @@ public class DalFacade implements IDalFacade {
 	public void saveVerse(VerseTO verse) throws SQLException {
 		// TODO Auto-generated method stub
 		verseDAO.saveVerse(verse);
-		
+
 	}
 
 	@Override
 	public void updatePoem(String existingTitle, PoemTO poem) throws SQLException {
 		// TODO Auto-generated method stub
 		poemDAO.updatePoem(existingTitle, poem);
-		
+
 	}
 
 	@Override
 	public void deletePoem(String title) throws SQLException {
 		// TODO Auto-generated method stub
 		poemDAO.deletePoem(title);
-		
+
 	}
 
 	@Override
@@ -173,7 +170,7 @@ public class DalFacade implements IDalFacade {
 	public void deleteVerse(String misra1, String misra2) throws SQLException {
 		// TODO Auto-generated method stub
 		verseDAO.deleteVerse(misra1, misra2);
-		
+
 	}
 
 	@Override
@@ -186,7 +183,7 @@ public class DalFacade implements IDalFacade {
 	public void insertRoot(RootTO root) throws SQLException {
 		// TODO Auto-generated method stub
 		rootDAO.insertRoot(root);
-		
+
 	}
 
 	@Override
@@ -204,7 +201,7 @@ public class DalFacade implements IDalFacade {
 	@Override
 	public void updateRootStatus(String selectedRoot, String selectedVerse) {
 		// TODO Auto-generated method stub
-		
+
 		rootDAO.updateRootStatus(selectedRoot, selectedVerse);
 	}
 

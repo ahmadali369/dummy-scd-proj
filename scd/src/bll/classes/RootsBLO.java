@@ -15,7 +15,7 @@ public class RootsBLO implements IRootsBLO {
 
 	public IDalFacade facadeDal;
 	private static final Logger logger = LogManager.getLogger(RootsBLO.class);
-	
+
 	public RootsBLO(IDalFacade facadeDal) {
 		this.facadeDal = facadeDal;
 	}
@@ -57,7 +57,7 @@ public class RootsBLO implements IRootsBLO {
 			logger.debug("insertRoot func triggerd an exception");
 //			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class RootsBLO implements IRootsBLO {
 			logger.debug("getAllRoots func triggerd an exception");
 			e.printStackTrace();
 		}
-		return null; 
+		return null;
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class RootsBLO implements IRootsBLO {
 			logger.debug("updateStatus func triggerd an exception");
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -92,11 +92,6 @@ public class RootsBLO implements IRootsBLO {
 		facadeDal.updateRootStatus(selectedRoot, selectedVerse);
 	}
 
+	// ==========================
 
-	
-	//==========================
-	
-	
-	
-	
 }

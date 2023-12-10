@@ -271,7 +271,6 @@ public class VersesPage extends JFrame {
 		addversesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
 				SwingUtilities.invokeLater(() -> new VersesAdd(facadeBLL).poem_id = poem_id);
 
 			}

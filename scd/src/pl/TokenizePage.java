@@ -104,7 +104,6 @@ public class TokenizePage {
 		rootAutoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
 				SwingUtilities.invokeLater(() -> new RootsAutoPage(facadeBLL).idVersesModel = idVersesModel);
 
 			}

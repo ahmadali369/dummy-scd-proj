@@ -262,7 +262,7 @@ public class RootDAO implements IRootDAO {
 		String updateQuery = "INSERT INTO root (token_id, verse_id, root, status) VALUES (?, ?, ?, 'Assigned')";
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-			preparedStatement.setInt(1, 1); // Assuming a static value for token_id, modify as needed
+			preparedStatement.setInt(1, 1); 
 			preparedStatement.setInt(2, verseId);
 			preparedStatement.setString(3, selectedRoot);
 
@@ -278,11 +278,11 @@ public class RootDAO implements IRootDAO {
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
 			logger.debug("updateRootStatus func triggerd an exception");
-			// Handle duplicate entry (optional, as the message will be printed above)
+
 			System.out.println("Cannot add duplicate entry");
 		} catch (SQLException e) {
 			logger.debug("updateRootStatus func triggerd an exception");
-			e.printStackTrace(); // Handle other SQL exceptions
+			e.printStackTrace(); 
 		}
 	}
 
@@ -310,7 +310,7 @@ public class RootDAO implements IRootDAO {
 			}
 		} catch (SQLException e) {
 			logger.debug("getVerseId func triggerd an exception");
-			e.printStackTrace(); // Handle SQL exceptions
+			e.printStackTrace(); 
 		}
 
 		return verseId;

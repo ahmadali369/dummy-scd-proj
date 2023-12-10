@@ -34,7 +34,6 @@ public class PoemPage extends JFrame {
 
 	private IBLLFacade facadeBLL;
 
-	
 	private static final Logger logger = LogManager.getLogger(PoemPage.class);
 
 	private static final long serialVersionUID = 1L;
@@ -70,18 +69,14 @@ public class PoemPage extends JFrame {
 		inputFieldsPanelForEditpoem = new JPanel();
 
 		JButton buttonRead = new JButton("Reload");
-		
-		JButton buttonRootSearch = new JButton("Search"); 
-		JTextField rootSearchField = new JTextField(20); 
-		
-		
-		
-		
-		
+
+		JButton buttonRootSearch = new JButton("Search");
+		JTextField rootSearchField = new JTextField(20);
+
 		JButton buttonEditpoem = new JButton("Edit");
 
 		crudOperationPanel.add(new JLabel("Poems----------------"));
-		
+
 		crudOperationPanel.add(rootSearchField);
 		crudOperationPanel.add(buttonRootSearch);
 		crudOperationPanel.add(buttonRead);
@@ -137,14 +132,6 @@ public class PoemPage extends JFrame {
 		crudOperationPanel.add(addPoemsButton);
 		crudOperationPanel.add(editButton);
 		crudOperationPanel.add(deleteButton);
-		
-		
-		
-		
-		
-		
-		
-		
 
 		buttonRead.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -198,14 +185,13 @@ public class PoemPage extends JFrame {
 			}
 
 		});
-		
-		
+
 		buttonRootSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<Map<String, Object>> poems = facadeBLL.getPoemsByRoot(rootSearchField.toString());
 
 				if (poems.isEmpty()) {
-					
+
 					System.err.println("empty");
 
 				} else {
@@ -358,5 +344,4 @@ public class PoemPage extends JFrame {
 
 	}
 
-	
 }

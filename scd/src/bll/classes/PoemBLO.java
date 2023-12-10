@@ -61,7 +61,7 @@ public class PoemBLO implements IPeomBLO {
 		dal.importPoem(bookid, file);
 
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> getAllPoems(int bookid) {
 		// TODO Auto-generated method stub
@@ -77,7 +77,7 @@ public class PoemBLO implements IPeomBLO {
 		return null;
 
 	}
-	
+
 //	@Override
 //	public String goToPoem(String root) {
 //		// TODO Auto-generated method stub
@@ -93,8 +93,7 @@ public class PoemBLO implements IPeomBLO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null; 
+		return null;
 	}
-
 
 }

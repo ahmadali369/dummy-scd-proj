@@ -357,19 +357,19 @@ public class RootsPO extends JFrame {
 		getContentPane().add(searchbtn);
 		getContentPane().add(clearbtn);
 
-		JButton btnNewButton_2 = new JButton(">");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-//			Root_Home root_Home = new Root_Home();
-//			root_Home.setVisible(true);
-//			viewupdate.dispose();
-
-			}
-		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnNewButton_2.setBounds(740, 28, 63, 32);
-		contentPane.add(btnNewButton_2);
+//		JButton btnNewButton_2 = new JButton(">");
+//		btnNewButton_2.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//
+////			Root_Home root_Home = new Root_Home();
+////			root_Home.setVisible(true);
+////			viewupdate.dispose();
+//
+//			}
+//		});
+//		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+//		btnNewButton_2.setBounds(740, 28, 63, 32);
+//		contentPane.add(btnNewButton_2);
 
 		insertbtn.addAncestorListener(null);
 

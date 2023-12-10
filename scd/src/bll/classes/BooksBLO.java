@@ -85,6 +85,4 @@ public class BooksBLO implements IBooksBLO {
 
 	}
 
-
-
 }

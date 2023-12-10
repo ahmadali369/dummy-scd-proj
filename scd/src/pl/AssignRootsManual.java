@@ -27,12 +27,12 @@ public class AssignRootsManual extends JFrame {
 		 */
 	private static final long serialVersionUID = 1L;
 
-	// private Connection connection;
+
 	private PorterStemmer stemmer;
 
 	private JComboBox<String> verseComboBox;
 	private JList<String> rootsList;
-	// private JTextArea suggestedRootsArea;
+	
 	private JTextField selectedRootField;
 	private List<String> selectedRootsList;
 
@@ -67,37 +67,37 @@ public class AssignRootsManual extends JFrame {
         JButton clearRootsButton = new JButton("Clear Roots");
         clearRootsButton.addActionListener(e -> clearRoots());
 
-        // Panel for verse selection
+
         JPanel versePanel = new JPanel(new FlowLayout());
         versePanel.add(new JLabel("Verse: "));
         versePanel.add(verseComboBox);
 
-        // Panel for root suggestions
+
         JPanel suggestionPanel = new JPanel(new FlowLayout());
         suggestionPanel.add(suggestRootButton);
         suggestionPanel.add(clearButton);
 
-        // Panel for root assignment
+
         JPanel assignmentPanel = new JPanel(new FlowLayout());
         assignmentPanel.add(new JLabel("Roots: "));
         assignmentPanel.add(rootsList);
         assignmentPanel.add(assignRootButton);
         assignmentPanel.add(clearRootsButton);
 
-        // Main panel
+
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(versePanel, BorderLayout.NORTH);
         mainPanel.add(suggestionPanel, BorderLayout.CENTER);
         mainPanel.add(assignmentPanel, BorderLayout.SOUTH);
 
-        // Panel for selected roots
+
         JPanel selectedRootPanel = new JPanel(new FlowLayout());
         selectedRootPanel.add(new JLabel("Selected Roots: "));
         selectedRootField = new JTextField(50);
         selectedRootField.setEditable(false);
         selectedRootPanel.add(selectedRootField);
 
-        // Adding components to the frame
+
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.NORTH);
         add(selectedRootPanel, BorderLayout.SOUTH);
@@ -105,7 +105,7 @@ public class AssignRootsManual extends JFrame {
         setTitle("Root Assignment Manually");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        // Set the size of the frame
+        
         setSize(700, 500);
 
         setLocationRelativeTo(null);
