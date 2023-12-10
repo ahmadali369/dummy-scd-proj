@@ -134,7 +134,8 @@ public class DBconfig {
 						    "id INT AUTO_INCREMENT PRIMARY KEY," +                          
 						    "verse_id INT," +                          
 						    "root VARCHAR(500) UNIQUE," +                     
-						    "status VARCHAR(500)" +                    
+						    "status VARCHAR(500)," +    
+						    "FOREIGN KEY (verse_id) REFERENCES verses (verse_id) ON DELETE CASCADE ON UPDATE CASCADE" +
 						    ")";
 
 						statement.executeUpdate(createRootTableSQL);
