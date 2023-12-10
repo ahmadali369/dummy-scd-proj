@@ -222,6 +222,8 @@ public class VersesPage extends JFrame {
 		buttonToken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				facadeBLL.tokenRootProcessing(poem_id); 
+				
 				SwingUtilities.invokeLater(() -> new TokenizePage(facadeBLL).idVersesModel = idmodel);
 
 			}

@@ -251,4 +251,12 @@ public class BLLFacade implements IBLLFacade {
 		return poemBLO.getPoemsByRoot(root);
 	}
 
+
+	@Override
+	public void tokenRootProcessing(int poem_id) {
+		// TODO Auto-generated method stub
+		tokenBLO.tokenRootProcessing(poem_id);
+		
+	}
+
 }
