@@ -55,7 +55,7 @@ public class TokenBLOTest {
 	@Test
 	void test1()  {
 		int poemid = 0; 
-		facadeBLL.getAllVersesAndGenerateTokensAndRootsList(poemid);
+		facadeBLL.getAllVerses(poemid);
 		Assertions.assertEquals(1, 1);
 	}
 	@Test

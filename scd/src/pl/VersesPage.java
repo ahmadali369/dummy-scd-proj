@@ -155,7 +155,7 @@ public class VersesPage extends JFrame {
 
 		buttonRead.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Map<String, Object>> verses = facadeBLL.getAllVersesAndGenerateTokensAndRootsList(poem_id);
+				List<Map<String, Object>> verses = facadeBLL.getAllVerses(poem_id);
 
 				if (verses.isEmpty()) {
 					System.err.println("no verses found------------");
@@ -222,7 +222,8 @@ public class VersesPage extends JFrame {
 		buttonToken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				facadeBLL.tokenRootProcessing(poem_id); 
+				facadeBLL.tokenProcessing(poem_id); 
+				facadeBLL.rootProcessing(poem_id); 
 				
 				SwingUtilities.invokeLater(() -> new TokenizePage(facadeBLL).idVersesModel = idmodel);
 

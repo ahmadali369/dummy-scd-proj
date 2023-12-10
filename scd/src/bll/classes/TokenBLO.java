@@ -24,54 +24,10 @@ public class TokenBLO implements ITokenBLO {
 		this.facadeDal = facadeDal;
 	}
 
+
+
 	@Override
-	public List<Map<String, Object>> getAllVersesAndGenerateTokensAndRootsList(int poem_id) {
-		// TODO Auto-generated method stub
-		try {
-
-//			List<Map<String, Object>> verses = facadeDal.getAllVerses(poem_id);
-//			for (Map<String, Object> verse : verses) {
-//
-//				String misra1 = (String) verse.get("misra1");
-//				String misra2 = (String) verse.get("misra2");
-//				int verse_id = (int) verse.get("verseId");
-//
-//				List<Map<String, Object>> tokens = generateTokens(misra1, misra2, verse_id);
-//
-//				for (Map<String, Object> token : tokens) {
-//
-//					String tokenValue = (String) token.get("token");
-//
-//					String pos = (String) token.get("pos");
-////					    System.out.println("pos----------------" + pos);
-//
-//					int verseId = (int) token.get("verseId");
-//					int rootId = (int) token.get("rootId");
-//
-//					TokenTO tokenn = new TokenTO(tokenValue, verseId, pos);
-//					insertToken(tokenn);
-//					RootTO root = new RootTO(verse_id, createRoot(tokenValue), "Auto");
-//
-//					facadeDal.insertRoot(root);
-//
-//					
-//
-//				}
-//
-//			}
-
-			return facadeDal.getAllVerses(poem_id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			logger.debug("getAllVerses func triggerd an exception");
-			e.printStackTrace();
-
-		}
-
-		return null;
-	}
-
-	public void tokenRootProcessing(int poem_id) {
+	public void tokenProcessing(int poem_id) {
 
 		try {
 			List<Map<String, Object>> verses = facadeDal.getAllVerses(poem_id);
@@ -89,13 +45,13 @@ public class TokenBLO implements ITokenBLO {
 					String pos = (String) token.get("pos");
 
 					int verseId = (int) token.get("verseId");
-					int rootId = (int) token.get("rootId");
+//					int rootId = (int) token.get("rootId");
 
 					TokenTO tokenn = new TokenTO(tokenValue, verseId, pos);
 					insertToken(tokenn);
-					RootTO root = new RootTO(verse_id, createRoot(tokenValue), "Auto");
-
-					facadeDal.insertRoot(root);
+//					RootTO root = new RootTO(verse_id, createRoot(tokenValue), "Auto");
+//
+//					facadeDal.insertRoot(root);
 
 				}
 
@@ -152,16 +108,16 @@ public class TokenBLO implements ITokenBLO {
 
 	}
 
-	public String createRoot(String word) {
-
-		String root = net.oujda_nlp_team.AlKhalil2Analyzer.getInstance().processToken(word).getAllRootString();
-		if (!root.isEmpty()) {
-			return root;
-		} else {
-			return " ";
-		}
-
-	}
+//	public String createRoot(String word) {
+//
+//		String root = net.oujda_nlp_team.AlKhalil2Analyzer.getInstance().processToken(word).getAllRootString();
+//		if (!root.isEmpty()) {
+//			return root;
+//		} else {
+//			return " ";
+//		}
+//
+//	}
 
 	@Override
 	public List<Map<String, Object>> generateTokens(String misra1, String misra2, int verse_id) {

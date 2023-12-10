@@ -119,10 +119,10 @@ public class BLLFacade implements IBLLFacade {
 
 
 	@Override
-	public List<Map<String, Object>> getAllVersesAndGenerateTokensAndRootsList(int poem_id) {
+	public List<Map<String, Object>> getAllVerses(int poem_id) {
 		// TODO Auto-generated method stub
 		 
-		return tokenBLO.getAllVersesAndGenerateTokensAndRootsList(poem_id);
+		return verseBLO.getAllVerses(poem_id);
 	}
 
 	@Override
@@ -253,9 +253,17 @@ public class BLLFacade implements IBLLFacade {
 
 
 	@Override
-	public void tokenRootProcessing(int poem_id) {
+	public void tokenProcessing(int poem_id) {
 		// TODO Auto-generated method stub
-		tokenBLO.tokenRootProcessing(poem_id);
+		tokenBLO.tokenProcessing(poem_id);
+		
+	}
+
+
+	@Override
+	public void rootProcessing(int poem_id) {
+		// TODO Auto-generated method stub
+		rootsBLO.rootProcessing(poem_id);
 		
 	}
 

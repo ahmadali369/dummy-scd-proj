@@ -116,7 +116,7 @@ public class AssignRootsManual extends JFrame {
 
 	private void loadVerses() {
 
-		List<Map<String, Object>> verses = facadeBLL.getAllVersesAndGenerateTokensAndRootsList(poem_idd);
+		List<Map<String, Object>> verses = facadeBLL.getAllVerses(poem_idd);
 
 		for (Map<String, Object> verse : verses) {
 			String verseText = verse.get("misra1") + " " + verse.get("misra2");
@@ -128,7 +128,7 @@ public class AssignRootsManual extends JFrame {
 	private List<String> getAllVerses() {
 		List<String> combinedVerses = new ArrayList<>();
 
-		List<Map<String, Object>> verses = facadeBLL.getAllVersesAndGenerateTokensAndRootsList(poem_idd);
+		List<Map<String, Object>> verses = facadeBLL.getAllVerses(poem_idd);
 		for (Map<String, Object> verse : verses) {
 			combinedVerses.add(verse.get("misra1") + " " + verse.get("misra2"));
 		}

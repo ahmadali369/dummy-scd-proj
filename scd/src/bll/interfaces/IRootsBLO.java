@@ -16,6 +16,7 @@ public interface IRootsBLO {
 
 	public void deleteroot(String id);
 
+	public void rootProcessing(int poem_id); 
 	
 	//
 	public void insertRoot(RootTO root); 
