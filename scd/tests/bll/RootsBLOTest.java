@@ -56,11 +56,12 @@ class RootsBLOTest {
 		facadeBLL.getAllRoots(); 
 		Assertions.assertEquals(1, 1);
 	}
-//	@Test
-//	void test2() throws SQLException {
-//		facadeBLL.insertroot("root");
-//		Assertions.assertEquals(1, 1);
-//	}
+	@Test
+	void test2() throws SQLException {
+		int poemid = 1; 
+		facadeBLL.rootProcessing(poemid);
+		Assertions.assertEquals(1, 1);
+	}
 	@Test
 	void test3() {
 		 

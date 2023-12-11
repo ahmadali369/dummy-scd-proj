@@ -77,7 +77,7 @@ class PoemBLOTest {
 	@Test
 	void test3() throws SQLException {
 
-		facadeBLL.savePoem(poemTO);
+		facadeBLL.getPoemsByRoot("root");
 
 		Assertions.assertEquals(1, 1);
 	}

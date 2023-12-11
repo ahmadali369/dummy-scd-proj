@@ -1,7 +1,5 @@
 package bll;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -62,12 +60,7 @@ class BooksBLOTest {
 		facadeBLL.getAllBooks(); 
 		Assertions.assertEquals(1, 1);
 	}
-//	@Test
-//	void test3() {
-//		int id = 3; 
-//		facadeBLL.getBook(id); 
-//		Assertions.assertEquals(1, 1);
-//	}
+
 	@Test
 	void test4() {
 		String existingtitleString = ""; 

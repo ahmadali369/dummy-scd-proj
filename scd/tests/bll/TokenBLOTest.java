@@ -52,12 +52,7 @@ public class TokenBLOTest {
 	
 	
 	
-	@Test
-	void test1()  {
-		int poemid = 0; 
-		facadeBLL.getAllVerses(poemid);
-		Assertions.assertEquals(1, 1);
-	}
+
 	@Test
 	void test2()  {
 		int verseid = 0; 
@@ -81,6 +76,13 @@ public class TokenBLOTest {
 	void test5() {
 		int verseid = 0; 
 		facadeBLL.generateTokens("misra1", "misra2", verseid);
+		Assertions.assertEquals(1, 1);
+	}
+	
+	@Test
+	void test6() {
+		int poemid = 0; 
+		facadeBLL.tokenProcessing(poemid);
 		Assertions.assertEquals(1, 1);
 	}
 	
