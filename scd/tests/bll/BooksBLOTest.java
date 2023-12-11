@@ -66,7 +66,7 @@ class BooksBLOTest {
 		facadeBLL.insertBook(bookTO);
 
 		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
-		Assertions.assertTrue(containsBookWithProperties(allBooks, bookTO), "Inserted book should be in the list");
+		Assertions.assertTrue(containsBook(allBooks, bookTO), "Inserted book should be in the list");
 	}
 
 	@Test
@@ -90,7 +90,7 @@ class BooksBLOTest {
 		facadeBLL.updateBook(existingBook.getTitle(), existingBook.getAuthorName(), updatedBook);
 
 		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
-		Assertions.assertTrue(containsBookWithProperties(allBooks, updatedBook), "Updated book should be in the list");
+		Assertions.assertTrue(containsBook(allBooks, updatedBook), "Updated book should be in the list");
 	}
 
 	@Test
@@ -105,7 +105,7 @@ class BooksBLOTest {
 		Assertions.assertFalse(allBooks.contains(bookTO), "Deleted book should not be in the list");
 	}
 
-	private boolean containsBookWithProperties(List<Map<String, Object>> allBooks, BookTO book) {
+	private boolean containsBook(List<Map<String, Object>> allBooks, BookTO book) {
 		for (Map<String, Object> bookMap : allBooks) {
 			if (bookMap.get("title").equals(book.getTitle()) && bookMap.get("authorName").equals(book.getAuthorName())
 					&& bookMap.get("authorDateOfBirth").equals(book.getAuthorDateOfBirth())

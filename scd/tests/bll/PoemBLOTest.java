@@ -69,7 +69,7 @@ class PoemBLOTest {
 		facadeBLL.savePoem(poemTO);
 
 		List<Map<String, Object>> allPoems = facadeBLL.getAllPoems(poemTO.getBookId());
-		Assertions.assertTrue(containsPoemWithProperties(allPoems, poemTO), "Saved poem should be in the list");
+		Assertions.assertTrue(containsPoem(allPoems, poemTO), "Saved poem should be in the list");
 	}
 
 	@Test
@@ -99,7 +99,7 @@ class PoemBLOTest {
 		facadeBLL.updatePoem(existingPoem.getTitle(), updatedPoem);
 
 		List<Map<String, Object>> allPoems = facadeBLL.getAllPoems(existingPoem.getBookId());
-		Assertions.assertTrue(containsPoemWithProperties(allPoems, updatedPoem), "Updated poem should be in the list");
+		Assertions.assertTrue(containsPoem(allPoems, updatedPoem), "Updated poem should be in the list");
 	}
 
 	@Test
@@ -129,7 +129,7 @@ class PoemBLOTest {
 		Assertions.assertTrue(poemsByRoot.isEmpty(), "List should be empty as no poems have the specified root");
 	}
 
-	private boolean containsPoemWithProperties(List<Map<String, Object>> allPoems, PoemTO poem) {
+	private boolean containsPoem(List<Map<String, Object>> allPoems, PoemTO poem) {
 		for (Map<String, Object> poemMap : allPoems) {
 			if (poemMap.get("title").equals(poem.getTitle()) && poemMap.get("bookId").equals(poem.getBookId())
 					&& poemMap.get("total_verses").equals(poem.getTotal_verses())) {
