@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ParameterObjects.DaoStubPO;
+import ParameterObjects.IDaoPo;
 import bll.classes.BLLFacade;
 import bll.classes.BooksBLO;
 import bll.classes.PoemBLO;
@@ -39,13 +41,15 @@ class BooksBLOTest {
 
 	@BeforeEach
 	void setUp() {
-		IPoemDAO poemDAO = new PoemDAOStub();
-		IBookDAO bookDAO = new BooksDAOStub();
-		IRootDAO rootDAO = new RootDAOStub();
-		ITokenDAO tokenDAO = new TokenDAOStub();
-		IVerseDAO verseDAO = new VersesDAOStub();
+//		IPoemDAO poemDAO = new PoemDAOStub();
+//		IBookDAO bookDAO = new BooksDAOStub();
+//		IRootDAO rootDAO = new RootDAOStub();
+//		ITokenDAO tokenDAO = new TokenDAOStub();
+//		IVerseDAO verseDAO = new VersesDAOStub();
+		
+		IDaoPo dPo = new DaoStubPO(); 
 
-		IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
+		IDalFacade facadeDAL = DalFacade.getInstance(dPo);
 
 		IBooksBLO booksBLO = new BooksBLO(facadeDAL);
 		IPeomBLO peomBLO = new PoemBLO(facadeDAL);

@@ -1,5 +1,6 @@
 import javax.swing.SwingUtilities;
 
+import ParameterObjects.DaoPO;
 import bll.classes.BLLFacade;
 import bll.classes.BooksBLO;
 import bll.classes.PoemBLO;
@@ -12,31 +13,25 @@ import bll.interfaces.IPeomBLO;
 import bll.interfaces.IRootsBLO;
 import bll.interfaces.ITokenBLO;
 import bll.interfaces.IVerseBLO;
-import dal.classes.BooksDAO;
 import dal.classes.DalFacade;
-import dal.classes.PoemDAO;
-import dal.classes.RootDAO;
-import dal.classes.TokensDAO;
-import dal.classes.VerseDAO;
-import dal.interfaces.IBookDAO;
 import dal.interfaces.IDalFacade;
-import dal.interfaces.IPoemDAO;
-import dal.interfaces.IRootDAO;
-import dal.interfaces.ITokenDAO;
-import dal.interfaces.IVerseDAO;
 import pl.BooksPO;
 
 public class MainClass {
 	public static void main(String[] args) {
 
-		IPoemDAO poemDAO = new PoemDAO();
-		IBookDAO bookDAO = new BooksDAO();
-		IRootDAO rootDAO = new RootDAO();
-		ITokenDAO tokenDAO = new TokensDAO();
-		IVerseDAO verseDAO = new VerseDAO();
+//		IPoemDAO poemDAO = new PoemDAO();
+//		IBookDAO bookDAO = new BooksDAO();
+//		IRootDAO rootDAO = new RootDAO();
+//		ITokenDAO tokenDAO = new TokensDAO();
+//		IVerseDAO verseDAO = new VerseDAO();
+//		IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
+		
+		DaoPO dPo = new DaoPO(); 
+		IDalFacade facadeDAL = DalFacade.getInstance(dPo);
 
-		IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
-
+		
+		
 		IBooksBLO booksBLO = new BooksBLO(facadeDAL);
 		IPeomBLO peomBLO = new PoemBLO(facadeDAL);
 		IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
