@@ -1,6 +1,10 @@
 package bll;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import bll.classes.BLLFacade;
@@ -31,50 +35,107 @@ import transferObjects.BookTO;
 
 class BooksBLOTest {
 
-	IPoemDAO poemDAO = new PoemDAOStub();
-	IBookDAO bookDAO = new BooksDAOStub();
-	IRootDAO rootDAO = new RootDAOStub();
-	ITokenDAO tokenDAO = new TokenDAOStub();
-	IVerseDAO verseDAO = new VersesDAOStub();
+	private IBLLFacade facadeBLL;
 
-	IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
+	@BeforeEach
+	void setUp() {
+		IPoemDAO poemDAO = new PoemDAOStub();
+		IBookDAO bookDAO = new BooksDAOStub();
+		IRootDAO rootDAO = new RootDAOStub();
+		ITokenDAO tokenDAO = new TokenDAOStub();
+		IVerseDAO verseDAO = new VersesDAOStub();
 
-	IBooksBLO booksBLO = new BooksBLO(facadeDAL);
-	IPeomBLO peomBLO = new PoemBLO(facadeDAL);
-	IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
-	ITokenBLO tokenBLO = new TokenBLO(facadeDAL);
-	IVerseBLO verseBLO = new VerseBLO(facadeDAL);
+		IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
 
-	IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
+		IBooksBLO booksBLO = new BooksBLO(facadeDAL);
+		IPeomBLO peomBLO = new PoemBLO(facadeDAL);
+		IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
+		ITokenBLO tokenBLO = new TokenBLO(facadeDAL);
+		IVerseBLO verseBLO = new VerseBLO(facadeDAL);
+
+		IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
+
+		this.facadeBLL = facadeBLL;
+	}
+
+	@Test
+	void testInsertBook() {
+	    // Arrange
+	    BookTO bookTO = createSampleBook();
+
+	    // Act
+	    facadeBLL.insertBook(bookTO);
+
+	    // Assert
+	    List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+	    Assertions.assertTrue(containsBookWithProperties(allBooks, bookTO), "Inserted book should be in the list");
+	}
+
+	@Test
+	void testGetAllBooks() {
+		// Act
+		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+
+		// Assert
+		Assertions.assertNotNull(allBooks, "Returned list should not be null");
+		Assertions.assertEquals(0, allBooks.size(), "List should be empty initially");
+	}
 	
-	BookTO bookTO = new BookTO(); 
+
+	@Test
+	void testUpdateBook() {
+	    // Arrange
+	    BookTO existingBook = createSampleBook();
+	    facadeBLL.insertBook(existingBook);
+
+	    BookTO updatedBook = createSampleBook(); // You can modify properties here
+	    updatedBook.setTitle("Updated Title");
+
+	    // Act
+	    facadeBLL.updateBook(existingBook.getTitle(), existingBook.getAuthorName(), updatedBook);
+
+	    // Assert
+	    List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+	    Assertions.assertTrue(containsBookWithProperties(allBooks, updatedBook), "Updated book should be in the list");
+	}
 	
 	@Test
-	void test1() {
-		
+	void testDeleteBook() {
+		// Arrange
+		BookTO bookTO = createSampleBook();
 		facadeBLL.insertBook(bookTO);
-		Assertions.assertEquals(1, 1);	
-	}
-	@Test
-	void test2() {
-		facadeBLL.getAllBooks(); 
-		Assertions.assertEquals(1, 1);
+
+		// Act
+		facadeBLL.deleteBook(bookTO.getTitle(), bookTO.getAuthorName());
+
+		// Assert
+		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+		Assertions.assertFalse(allBooks.contains(bookTO), "Deleted book should not be in the list");
 	}
 
-	@Test
-	void test4() {
-		String existingtitleString = ""; 
-		String existingauthorString = ""; 
-		
-		facadeBLL.updateBook(existingtitleString, existingauthorString, bookTO);
-		Assertions.assertEquals(1, 1);
-	}
-	@Test
-	void test5() {
-		
-		facadeBLL.deleteBook("title", "author");
-		Assertions.assertEquals(1, 1);
+	
+	
+	// Add this utility method to check if a list of maps contains a book with specific properties
+	private boolean containsBookWithProperties(List<Map<String, Object>> allBooks, BookTO book) {
+	    for (Map<String, Object> bookMap : allBooks) {
+	        if (bookMap.get("title").equals(book.getTitle()) &&
+	            bookMap.get("authorName").equals(book.getAuthorName()) &&
+	            bookMap.get("authorDateOfBirth").equals(book.getAuthorDateOfBirth()) &&
+	            bookMap.get("authorDateOfDeath").equals(book.getAuthorDateOfDeath()) &&
+	            bookMap.get("totalPoems").equals(book.getTotalPoems())) {
+	            return true;
+	        }
+	    }
+	    return false;
 	}
 
-
+	private BookTO createSampleBook() {
+		BookTO bookTO = new BookTO();
+		bookTO.setTitle("Sample Title");
+		bookTO.setAuthorName("Sample Author");
+		bookTO.setAuthorDateOfBirth("1990-01-01");
+		bookTO.setAuthorDateOfDeath("2020-12-31");
+		bookTO.setTotalPoems(10);
+		return bookTO;
+	}
 }
