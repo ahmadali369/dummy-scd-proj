@@ -60,73 +60,61 @@ class BooksBLOTest {
 
 	@Test
 	void testInsertBook() {
-	    // Arrange
-	    BookTO bookTO = createSampleBook();
 
-	    // Act
-	    facadeBLL.insertBook(bookTO);
+		BookTO bookTO = createSampleBook();
 
-	    // Assert
-	    List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
-	    Assertions.assertTrue(containsBookWithProperties(allBooks, bookTO), "Inserted book should be in the list");
+		facadeBLL.insertBook(bookTO);
+
+		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+		Assertions.assertTrue(containsBookWithProperties(allBooks, bookTO), "Inserted book should be in the list");
 	}
 
 	@Test
 	void testGetAllBooks() {
-		// Act
+
 		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
 
-		// Assert
 		Assertions.assertNotNull(allBooks, "Returned list should not be null");
 		Assertions.assertEquals(0, allBooks.size(), "List should be empty initially");
 	}
-	
 
 	@Test
 	void testUpdateBook() {
-	    // Arrange
-	    BookTO existingBook = createSampleBook();
-	    facadeBLL.insertBook(existingBook);
 
-	    BookTO updatedBook = createSampleBook(); // You can modify properties here
-	    updatedBook.setTitle("Updated Title");
+		BookTO existingBook = createSampleBook();
+		facadeBLL.insertBook(existingBook);
 
-	    // Act
-	    facadeBLL.updateBook(existingBook.getTitle(), existingBook.getAuthorName(), updatedBook);
+		BookTO updatedBook = createSampleBook();
+		updatedBook.setTitle("Updated Title");
 
-	    // Assert
-	    List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
-	    Assertions.assertTrue(containsBookWithProperties(allBooks, updatedBook), "Updated book should be in the list");
+		facadeBLL.updateBook(existingBook.getTitle(), existingBook.getAuthorName(), updatedBook);
+
+		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
+		Assertions.assertTrue(containsBookWithProperties(allBooks, updatedBook), "Updated book should be in the list");
 	}
-	
+
 	@Test
 	void testDeleteBook() {
-		// Arrange
+
 		BookTO bookTO = createSampleBook();
 		facadeBLL.insertBook(bookTO);
 
-		// Act
 		facadeBLL.deleteBook(bookTO.getTitle(), bookTO.getAuthorName());
 
-		// Assert
 		List<Map<String, Object>> allBooks = facadeBLL.getAllBooks();
 		Assertions.assertFalse(allBooks.contains(bookTO), "Deleted book should not be in the list");
 	}
 
-	
-	
-	// Add this utility method to check if a list of maps contains a book with specific properties
 	private boolean containsBookWithProperties(List<Map<String, Object>> allBooks, BookTO book) {
-	    for (Map<String, Object> bookMap : allBooks) {
-	        if (bookMap.get("title").equals(book.getTitle()) &&
-	            bookMap.get("authorName").equals(book.getAuthorName()) &&
-	            bookMap.get("authorDateOfBirth").equals(book.getAuthorDateOfBirth()) &&
-	            bookMap.get("authorDateOfDeath").equals(book.getAuthorDateOfDeath()) &&
-	            bookMap.get("totalPoems").equals(book.getTotalPoems())) {
-	            return true;
-	        }
-	    }
-	    return false;
+		for (Map<String, Object> bookMap : allBooks) {
+			if (bookMap.get("title").equals(book.getTitle()) && bookMap.get("authorName").equals(book.getAuthorName())
+					&& bookMap.get("authorDateOfBirth").equals(book.getAuthorDateOfBirth())
+					&& bookMap.get("authorDateOfDeath").equals(book.getAuthorDateOfDeath())
+					&& bookMap.get("totalPoems").equals(book.getTotalPoems())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private BookTO createSampleBook() {
