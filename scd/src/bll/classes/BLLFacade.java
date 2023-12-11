@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import ParameterObjects.BloPO;
 import bll.interfaces.IBLLFacade;
 import bll.interfaces.IBooksBLO;
 import bll.interfaces.IPeomBLO;
@@ -22,33 +23,43 @@ import transferObjects.VerseTO;
 
 public class BLLFacade implements IBLLFacade {
 
-	private IBooksBLO booksBLO;
-	private IPeomBLO poemBLO;
-	private IRootsBLO rootsBLO;
-	private ITokenBLO tokenBLO;
-	private IVerseBLO verseBLO; 
+//	private IBooksBLO booksBLO;
+//	private IPeomBLO poemBLO;
+//	private IRootsBLO rootsBLO;
+//	private ITokenBLO tokenBLO;
+//	private IVerseBLO verseBLO; 
+	
+	BloPO bloPO; 
 	
 	private static BLLFacade obj;
 
-	public static BLLFacade getInstance(IBooksBLO booksBLO, IPeomBLO poemBLO, IRootsBLO rootBLO, ITokenBLO tokenBLO, IVerseBLO verseBLO) {
+	public static BLLFacade getInstance(BloPO bloPO) {
 		if (obj == null)
-			obj = new BLLFacade(booksBLO, poemBLO, rootBLO, tokenBLO, verseBLO);
+			obj = new BLLFacade(bloPO);
 		return obj;
 	}
 	
 	
-	private BLLFacade(IBooksBLO booksBLO, IPeomBLO poemBLO, IRootsBLO rootBLO, ITokenBLO tokenBLO, IVerseBLO verseBLO) {
-		this.booksBLO = booksBLO;
-		this.poemBLO = poemBLO;
-		this.rootsBLO = rootBLO;
-		this.tokenBLO = tokenBLO; 
-		this.verseBLO = verseBLO; 
+//	private BLLFacade(IBooksBLO booksBLO, IPeomBLO poemBLO, IRootsBLO rootBLO, ITokenBLO tokenBLO, IVerseBLO verseBLO) {
+//		this.booksBLO = booksBLO;
+//		this.poemBLO = poemBLO;
+//		this.rootsBLO = rootBLO;
+//		this.tokenBLO = tokenBLO; 
+//		this.verseBLO = verseBLO; 
+//
+//	}
 
-	}
+	
+	private BLLFacade(BloPO bloPO) {
 
+		this.bloPO = bloPO; 
+
+}
+
+	
 	@Override
 	public void savePoem(PoemTO poem) throws SQLException {
-		poemBLO.savePoem(poem);
+		bloPO.getPeomBLO().savePoem(poem);
 
 	}
 
@@ -57,13 +68,13 @@ public class BLLFacade implements IBLLFacade {
 	@Override
 	public void insertBook(BookTO book) {
 
-		booksBLO.insertBook(book);
+		bloPO.getBooksBLO().insertBook(book);
 
 	}
 
 	@Override
 	public List<Map<String, Object>> getAllBooks() {
-		return booksBLO.getAllBooks();
+		return bloPO.getBooksBLO().getAllBooks();
 	}
 
 //	@Override
@@ -74,20 +85,20 @@ public class BLLFacade implements IBLLFacade {
 
 	@Override
 	public void updateBook(String existingTitle, String existingAuthorName, BookTO book) {
-		booksBLO.updateBook(existingTitle, existingAuthorName, book);
+		bloPO.getBooksBLO().updateBook(existingTitle, existingAuthorName, book);
 
 	}
 
 	@Override
 	public void deleteBook(String title, String authorName) {
-		booksBLO.deleteBook(title, authorName);
+		bloPO.getBooksBLO().deleteBook(title, authorName);
 
 	}
 
 	@Override
 	public List getAllRoots() throws SQLException {
 
-		return rootsBLO.getAllRoots();
+		return bloPO.getRootsBLO().getAllRoots();
 	}
 //
 //	@Override
@@ -100,20 +111,20 @@ public class BLLFacade implements IBLLFacade {
 	@Override
 	public void updateWord(String rootw, String id) {
 		// TODO Auto-generated method stub
-		rootsBLO.updateWord(rootw, id);
+		bloPO.getRootsBLO().updateWord(rootw, id);
 	}
 
 	@Override
 	public void deleteroot(String id) {
 		// TODO Auto-generated method stub
-		rootsBLO.deleteroot(id);
+		bloPO.getRootsBLO().deleteroot(id);
 
 	}
 
 	@Override
 	public List<Map<String, Object>> getAllPoems(int bookid) {
 		// TODO Auto-generated method stub
-		return poemBLO.getAllPoems(bookid);
+		return bloPO.getPeomBLO().getAllPoems(bookid);
 
 	}
 
@@ -122,92 +133,92 @@ public class BLLFacade implements IBLLFacade {
 	public List<Map<String, Object>> getAllVerses(int poem_id) {
 		// TODO Auto-generated method stub
 		 
-		return verseBLO.getAllVerses(poem_id);
+		return bloPO.getVerseBLO().getAllVerses(poem_id);
 	}
 
 	@Override
 	public void insertToken(TokenTO token)  {
 		// TODO Auto-generated method stub
-		tokenBLO.insertToken(token);
+		bloPO.getTokenBLO().insertToken(token);
 	}
 
 	@Override
 	public void saveVerse(VerseTO verse) throws SQLException {
 		// TODO Auto-generated method stub
-		verseBLO.saveVerse(verse);
+		bloPO.getVerseBLO().saveVerse(verse);
 		
 	}
 
 	@Override
 	public void updatePoem(String existingTitle, PoemTO poem) {
 		// TODO Auto-generated method stub
-		poemBLO.updatePoem(existingTitle, poem);
+		bloPO.getPeomBLO().updatePoem(existingTitle, poem);
 		
 	}
 
 	@Override
 	public void deletePoem(String title) {
 		// TODO Auto-generated method stub
-		poemBLO.deletePoem(title);
+		bloPO.getPeomBLO().deletePoem(title);
 		
 	}
 
 	@Override
 	public void updateVerse(String existingMisra1, String existingMisra2, VerseTO verse) {
 		// TODO Auto-generated method stub
-		verseBLO.updateVerse(existingMisra1, existingMisra2, verse);
+		bloPO.getVerseBLO().updateVerse(existingMisra1, existingMisra2, verse);
 		
 	}
 
 	@Override
 	public void deleteVerse(String misra1, String misra2) {
 		// TODO Auto-generated method stub
-		verseBLO.deleteVerse(misra1, misra2);
+		bloPO.getVerseBLO().deleteVerse(misra1, misra2);
 		
 	}
 
 	@Override
 	public List<Map<String, Object>> getAllTokens(int verseId) {
 		// TODO Auto-generated method stub
-		return tokenBLO.getAllTokens(verseId);
+		return bloPO.getTokenBLO().getAllTokens(verseId);
 	}
 
 	@Override
 	public String createPos(String word) {
 		// TODO Auto-generated method stub
-		return tokenBLO.createPos(word);
+		return bloPO.getTokenBLO().createPos(word);
 	}
 
 	@Override
 	public List<Map<String, Object>> generateTokens(String misra1, String misra2, int verse_id) {
 		// TODO Auto-generated method stub
-		return tokenBLO.generateTokens(misra1, misra2, verse_id);
+		return bloPO.getTokenBLO().generateTokens(misra1, misra2, verse_id);
 	}
 
 	@Override
 	public void insertRoot(RootTO root) {
 		// TODO Auto-generated method stub
-		rootsBLO.insertRoot(root);
+		bloPO.getRootsBLO().insertRoot(root);
 		
 	}
 
 	@Override
 	public List<Map<String, Object>> getAllRootsByVerseId(int verseId) {
 		// TODO Auto-generated method stub
-		return rootsBLO.getAllRootsByVerseId(verseId);
+		return bloPO.getRootsBLO().getAllRootsByVerseId(verseId);
 	}
 
 	@Override
 	public void updateStatus(int verse_id) {
 		// TODO Auto-generated method stub
-		rootsBLO.updateStatus(verse_id);
+		bloPO.getRootsBLO().updateStatus(verse_id);
 		
 	}
 
 	@Override
 	public void updateRootStatus(String selectedRoot, String selectedVerse) {
 		// TODO Auto-generated method stub
-		rootsBLO.updateRootStatus(selectedRoot, selectedVerse);
+		bloPO.getRootsBLO().updateRootStatus(selectedRoot, selectedVerse);
 	}
 
 //	@Override
@@ -240,7 +251,7 @@ public class BLLFacade implements IBLLFacade {
 	@Override
 	public void importPoem(int bookid, File file) throws SQLException {
 		// TODO Auto-generated method stub
-		poemBLO.importPoem(bookid, file);
+		bloPO.getPeomBLO().importPoem(bookid, file);
 		
 	}
 
@@ -248,14 +259,14 @@ public class BLLFacade implements IBLLFacade {
 	@Override
 	public List<Map<String, Object>> getPoemsByRoot(String root) {
 		// TODO Auto-generated method stub
-		return poemBLO.getPoemsByRoot(root);
+		return bloPO.getPeomBLO().getPoemsByRoot(root);
 	}
 
 
 	@Override
 	public void tokenProcessing(int poem_id) {
 		// TODO Auto-generated method stub
-		tokenBLO.tokenProcessing(poem_id);
+		bloPO.getTokenBLO().tokenProcessing(poem_id);
 		
 	}
 
@@ -263,7 +274,7 @@ public class BLLFacade implements IBLLFacade {
 	@Override
 	public void rootProcessing(int poem_id) {
 		// TODO Auto-generated method stub
-		rootsBLO.rootProcessing(poem_id);
+		bloPO.getRootsBLO().rootProcessing(poem_id);
 		
 	}
 

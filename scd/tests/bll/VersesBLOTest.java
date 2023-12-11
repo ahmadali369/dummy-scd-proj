@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import ParameterObjects.BloPO;
 import ParameterObjects.DaoStubPO;
 import ParameterObjects.IDaoPo;
 import bll.classes.BLLFacade;
@@ -43,12 +44,9 @@ class VersesBLOTest {
 	IDalFacade facadeDAL = DalFacade.getInstance(dPo);
 	
 	IBooksBLO booksBLO = new BooksBLO(facadeDAL);
-	IPeomBLO peomBLO = new PoemBLO(facadeDAL);
-	IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
-	ITokenBLO tokenBLO = new TokenBLO(facadeDAL);
-	IVerseBLO verseBLO = new VerseBLO(facadeDAL);
-
-	IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
+	BloPO bloPO = new BloPO(facadeDAL); 
+	
+	IBLLFacade facadeBLL = BLLFacade.getInstance(bloPO);
 
 	@Test
 	void testSaveVerse() throws SQLException {

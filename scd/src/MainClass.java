@@ -1,5 +1,6 @@
 import javax.swing.SwingUtilities;
 
+import ParameterObjects.BloPO;
 import ParameterObjects.DaoPO;
 import bll.classes.BLLFacade;
 import bll.classes.BooksBLO;
@@ -26,19 +27,20 @@ public class MainClass {
 //		ITokenDAO tokenDAO = new TokensDAO();
 //		IVerseDAO verseDAO = new VerseDAO();
 //		IDalFacade facadeDAL = DalFacade.getInstance(poemDAO, bookDAO, rootDAO, tokenDAO, verseDAO);
-		
-		DaoPO dPo = new DaoPO(); 
-		IDalFacade facadeDAL = DalFacade.getInstance(dPo);
 
-		
-		
-		IBooksBLO booksBLO = new BooksBLO(facadeDAL);
-		IPeomBLO peomBLO = new PoemBLO(facadeDAL);
-		IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
-		ITokenBLO tokenBLO = new TokenBLO(facadeDAL);
-		IVerseBLO verseBLO = new VerseBLO(facadeDAL);
+//		IBooksBLO booksBLO = new BooksBLO(facadeDAL);
+//		IPeomBLO peomBLO = new PoemBLO(facadeDAL);
+//		IRootsBLO rootsBLO = new RootsBLO(facadeDAL);
+//		ITokenBLO tokenBLO = new TokenBLO(facadeDAL);
+//		IVerseBLO verseBLO = new VerseBLO(facadeDAL);
 
-		IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
+//		IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
+
+		DaoPO daoPo = new DaoPO();
+		IDalFacade facadeDAL = DalFacade.getInstance(daoPo);
+
+		BloPO bloPO = new BloPO(facadeDAL);
+		IBLLFacade facadeBLL = BLLFacade.getInstance(bloPO);
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
