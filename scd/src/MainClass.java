@@ -36,6 +36,8 @@ public class MainClass {
 
 //		IBLLFacade facadeBLL = BLLFacade.getInstance(booksBLO, peomBLO, rootsBLO, tokenBLO, verseBLO);
 
+		
+		
 		DaoPO daoPo = new DaoPO();
 		IDalFacade facadeDAL = DalFacade.getInstance(daoPo);
 
